@@ -36,11 +36,14 @@ def tag(n, ts):
     ndir = '{}/{}'.format(nodePath, n)
     if not os.path.exists(ndir):
         invalid('node does not exist')
-    with open('{}/tags'.format(ndir), 'a') as nf:
+    with open('{}/tags'.format(ndir), 'a+') as nf:
+        nf.seek(0)
+        existing = frozenset([line.strip() for line in nf])
         for t in ts:
-            nf.write('{}\n'.format(t))
-            with open('{}/{}'.format(tagPath, t), 'a') as tf:
-                tf.write('{}\n'.format(n))
+            if t not in existing:
+                nf.write('{}\n'.format(t))
+                with open('{}/{}'.format(tagPath, t), 'a') as tf:
+                    tf.write('{}\n'.format(n))
     
 if __name__ == '__main__':
     if len(sys.argv) < 2:
