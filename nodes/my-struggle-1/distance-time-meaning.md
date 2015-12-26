@@ -1,0 +1,7 @@
+A striking passage from early on that maybe defines the project of these books:
+
+> As your perspective of the world increases not only is the pain it inflicts on you less but also its meaning. Understanding the world requires you to keep a certain distance from it. Things that are too small for the naked eye to see, such as molecules and atoms, we magnify. Things that are too large, such as cloud formations, river deltas, constellations, we reduce. At length we bring it within the scope of our senses and we stabilize it with fixer. When it has been fixed we call it knowledge. Throughout our childhood and teenage years we strive to attain the correct distance from objects and phenomena. We read, we learn, we experience, we make adjustments. Then one day we reach the point where all the necessary distances have been set, all the necessary systems have been put in place. That is when time begins to pick up speed. It no longer meets any obstacles, everything is set, time races through our lives, the days pass by in a flash and before we know what is happening we are forty, fifty, sixty ... Meaning requires content, content requires time, time requires resistance.
+
+What I think this says is that Knausgaard is basically trying to slow down time, create resistance and meaning for himself, by writing these books. The immense amount of detail and description, often banal, serves to slow everything down.
+
+Is this somehow related to Proust?
