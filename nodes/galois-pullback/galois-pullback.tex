@@ -1,0 +1,85 @@
+\input{preamble}
+
+\title{Pulling back a Galois correspondence}
+\author{Arpon Raksit}
+\date{October 25, 2014}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Sub}{\operatorname{Sub}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\ab}{\mathrm{ab}}
+\newcommand{\Ab}{\mathrm{Ab}}
+
+\begin{definition}
+  For $G$ a topological group, we denote by $\Sub_G$ the set of open normal subgroups of $G$, which is a poset under inclusion.
+\end{definition}
+
+\begin{proposition}
+  \label{main}
+  Let $G$ be a profinite group. Suppose we have a morphism of   topological groups $\phi \c A \to G$ such that for every $N \in \Sub_G$ the induced map $\phi_N \c A/\phi^{-1}(N) \to G/N$ is an isomorphism. Then:
+  \begin{enumerate}
+  \item \label{preimage-injective} the preimage map $\Sub_G \to \Sub_A$, defined by $N \mapsto \phi^{-1}(N)$, is injective;
+  \item \label{join-preserved} $\phi^{-1}(N_1N_2) = \phi^{-1}(N_1)\phi^{-1}(N_2)$ for
+    $N_1,N_2 \in \Sub_G$.
+  \end{enumerate}
+\end{proposition}
+   
+\begin{proof}
+  Let $N_1,N_2 \in \Sub_G$. To prove \eqref{preimage-injective} it suffices to show that $N_1 \subseteq N_2$ if $\phi^{-1}(N_1) \subseteq \phi^{-1}(N_2)$, so assume the latter. Then
+  \begin{equation}
+    \label{intersection-preserved}
+    \phi^{-1}(N_1 \cap N_2) = \phi^{-1}(N_1) \cap \phi^{-1}(N_2) =
+    \phi^{-1}(N_2).
+  \end{equation}
+  Now consider the commutative diagram
+  \[
+  \begin{tikzcd}
+    A \ar[d, "\phi"] \ar[r] &
+    A/\phi^{-1}(N_1 \cap N_2) \ar[d, "\phi_{N_1 \cap N_2}"] \ar[r] &
+    A/\phi^{-1}(N_2) \ar[d, "\phi_{N_2}"] \\
+    G \ar[r] & G/(N_1 \cap N_2) \ar[r] & G/N_2
+  \end{tikzcd}
+  \]
+  with the horizontal maps the projections. In the right-hand square, the vertical maps are isomorphisms by hypothesis, and the top horizontal map is an isomorphism by \eqref{intersection-preserved}; thus the bottom horizontal map is an isomorphism, which implies $N_1 \subseteq N_2$.
+
+  We now prove \eqref{join-preserved}. Certainly $\phi^{-1}(N_1N_2) \supseteq \phi^{-1}(N_1)\phi^{-1}(N_2)$. And it's fairly easy to see we have the sequence of identifications
+  \begin{align*}
+    \frac{\phi^{-1}(N_1)\phi^{-1}(N_2)}{\phi^{-1}(N_1)}
+    & \iso \frac{\phi^{-1}(N_2)}{\phi^{-1}(N_1) \cap \phi^{-1}(N_2)}
+      = \frac{\phi^{-1}(N_2)}{\phi^{-1}(N_1 \cap N_2)} \\
+    & = \phi_{N_1 \cap N_2}^{-1}\l( \frac{N_1}{N_1 \cap N_2} \r)
+      \iso \phi_{N_1}^{-1}\l( \frac{N_1N_2}{N_1} \r)
+      = \frac{\phi^{-1}(N_1N_2)}{\phi^{-1}(N_1)}.
+  \end{align*}
+  But since $\phi^{-1}(N_1)$ has finite index in $A$, it follows that
+  \[
+  [\phi^{-1}(N_1N_2) : \phi^{-1}(N_1)\phi^{-1}(N_2)] = \l[
+  \frac{\phi^{-1}(N_1N_2)}{\phi^{-1}(N_1)} :
+  \frac{\phi^{-1}(N_1)\phi^{-1}(N_2)}{\phi^{-1}(N_1)} \r] = 1,
+  \]
+  proving the desired claim.
+\end{proof}
+
+\begin{example}
+  If we take $G$ to be a Galois group in \eqref{main}, then the proposition says that when we have a suitable morphism $A \to G$, the Galois theory described by $G$ is in fact controlled by $A$. This is what I meant by ``pulling back a Galois correspondence'' in the title. Let's state this in more detail in the motivating
+  example.
+
+  Let $K$ be a non-archimedean local field. Let $K^\ab$ be a maximal abelian extension of $K$. The Galois group $G \ce \Gal(K^\ab/K)$ is a profinite group, and Galois theory tells us that the poset $\Sub_G$ is (contravariantly) equivalent to the poset $\Ab_K$ of finite abelian extensions of $K$, i.e. the set of finite subextensions of $K^\ab$ ordered by inclusion. The ``reciprocity'' statement in local class field theory asserts:
+  \begin{itemize}
+  \item existence of a morphism $\phi_K \c K^\times \to \Gal(K^\ab/K)$ satisfying the hypothesis of \eqref{main};
+  \item if $N \ce \Stab_L \in \Sub_G$ is the subgroup corresponding to a finite abelian extension $K \inj L$, then $\phi_K^{-1}(N)$ is the \emph{norm group} $N_{L/K}(L^\times) \subseteq K^\times$.
+  \end{itemize}
+  Thus, putting \eqref{main} and Galois theory together gives us that the poset $\Ab_K$ is (contravariantly) equivalent to the poset of norm groups in $K^\times$ by the correspondence $L \mapsto N_{L/K}(L^\times)$. Then there is an ``existence'' theorem in local class field theory stating that the norm groups are precisely the open subgroups of finite index in $K^\times$.
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}
