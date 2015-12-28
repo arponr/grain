@@ -5,6 +5,7 @@ This note contains my thoughts on the philosophy behind Knausgaard's project in 
 - What are Knausgaard's goals in writing this text?
 - How does the nature/style of the texts work towards achieving these goals?
 
+
 # Time, distance, and meaning
 
 A striking passage from early on that maybe defines the project of these books:
@@ -60,7 +61,7 @@ This highlights a really practical, understandable sense in which the world is b
 
 ## How this explains the project
 
-So Knausgaard wants to break from this relativism and abstraction. He wants to just present in all its gory, banal detail an objective experience. He wants to make death real again by describing over hundreds of pages the process of cleaning up shit and piss from a house full of death. And he wants to return to the perspective of a child, who perceives everything as real and objective and  meaningful.
+So Knausgaard wants to break from this relativism and abstraction. He wants to just present in all its gory, banal detail an objective experience. He wants to make death real again by describing over hundreds of pages the process of cleaning up shit and piss from a house full of death. And he wants to return to the perspective of a child, who perceives everything as real and objective and meaningful.
 
 ## The horrible irony of it all
 

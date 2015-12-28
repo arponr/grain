@@ -192,23 +192,28 @@
 \defthm{theorem}{Theorem}
 
 \setlist{%
-  leftmargin=2.5em, parsep=0ex, listparindent=\parindent,
+  parsep=0ex, listparindent=\parindent,
   itemsep=1.0ex, topsep=1.0ex,%
 }
 
 \setlist[enumerate, 1]{%
-  label=(\alph*),%
-  ref=\alph*,%
-  widest=d,%
+  leftmargin=*,%
+  label=(\theequation.\arabic*),%
+  ref=\theequation.\arabic*,%
 }
 \setlist[enumerate, 2]{%
-  label=(\roman*),%
-  ref=\theenumi.\roman*,%
+  leftmargin=*,%
+  label=(\theenumi.\arabic*),%
+  ref=\theenumi.\arabic*,%
 }
 \setlist[itemize, 1]{%
+  leftmargin=2.5em,
   label=$\vcenter{\hbox{\footnotesize$\bullet$}}$,%
 }
-\setlist[itemize, 2]{label=--}
+\setlist[itemize, 2]{%
+  leftmargin=2.5em,%
+  label=--,%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -382,8 +387,8 @@
 \newcommand{\dash}{\text{-}}
 \renewcommand{\c}{\colon}
 \newcommand{\lc}{\,:\!}
-\newcommand{\ce}{\coloneq}%{\mathrel{:=}}
-\newcommand{\ec}{\eqcolon}%{\mathrel{=:}}
+\newcommand{\ce}{\mathrel{:=}}%{\coloneq}
+\newcommand{\ec}{\mathrel{=:}}%{\eqcolon}
 \newcommand{\iso}{\simeq}
 \newcommand{\dual}{\vee}
 \newcommand{\ldb}{\llbracket}
