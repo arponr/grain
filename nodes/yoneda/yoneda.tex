@@ -1,0 +1,236 @@
+\input{preamble}
+
+\title{The Yoneda lemma}
+\author{Arpon Raksit}
+\date{November 6, 2013}
+
+\numberwithin{equation}{section}
+% \cspreto{section}{\setcounter{equation}{0}}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\PSh}{\mathrm{PSh}}
+
+\section{Introduction}
+
+This is going to be short. I feel like every so often I realise how
+magical the Yoneda lemma is. One of those realisations just occurred
+so let me write something down. I'll record the statement and proof of
+the lemma here too, for completeness.
+
+\begin{notation}
+  We fix throughout a (locally small) category $\C$. Denote by
+  $\PSh(\C)$ the category of (contravariant) functors $\C^{\op} \to
+  \Set$.
+\end{notation}
+
+\begin{definition}
+  For $X \in \Obj(\C)$ we define the functor $h_X : \C^{\op} \to \Set$
+  by:
+  \begin{itemize}
+  \item $h_X(T) \ce \Hom_\C(T,X)$ for $T \in \Obj(\C)$;
+  \item $h_X(f) : h_X(T) \to h_X(S)$ sends $g \in \Hom_\C(T,X) \mapsto
+    g \circ f \in \Hom_\C(S,X)$ for $f \in \Hom_\C(S,T)$.
+  \end{itemize}
+  Observe also that any $f \in \Hom_\C(X,Y)$ defines a natural
+  transformation $h_f : h_X \to h_Y$ by $g \in \Hom_\C(T,X) \mapsto f
+  \circ g \in \Hom_\C(T,Y)$. Thus we have defined a functor $h : \C
+  \to \PSh(\C)$.
+\end{definition}
+
+\begin{lemma}[Yoneda]
+  Let $F : \C^{\op} \to \Set$ any (contravariant) functor. Let $X \in
+  \Obj(C)$. Then there is a natural bijection
+  \[
+  \Hom_{\PSh(\C)}(h_X,F) \simeq F(X)
+  \]
+  between the natural transformations $h_X \to F$ and the set $F(X)$.
+\end{lemma}
+
+\begin{proof}
+  Let $\alpha : h_X \to F$ a natural transformation. Then for each $T
+  \in \Obj(\C)$ and $f \in \Hom_\C(T,X)$, by definition of $h$ we have
+  the commutative diagram
+  \[
+  \begin{tikzcd}[column sep = large]
+    \Hom_\C(X,X) \rar{g \mapsto g \circ f} \dar{\alpha_x} &
+    \Hom_\C(T,X) \dar{\alpha_T} \\ F(X) \rar{F(f)} & F(T).
+  \end{tikzcd}
+  \]
+  Setting $g = \id_X$ gives us that $\alpha_T(f) =
+  F(f)(\alpha_X(\id_X))$. It follows that
+  \[
+  \Hom_{\PSh(\C)}(h_X, F) \to F(X), \quad \alpha \mapsto
+  \alpha_X(\id_X)
+  \]
+  gives the necessary bijection.
+\end{proof}
+
+\begin{corollary}
+  \label{yoneda-embedding}
+  The functor $h : \C \to \PSh(\C)$ is fully faithful. In particular, $X
+  \simeq Y$ if and only if $h_X \simeq h_Y$ for $X,Y \in \Obj(\C)$.
+\end{corollary}
+
+\begin{proof}
+  Setting $F \ce h_Y$ in the Yoneda lemma above gives us
+  precisely that the map $\Hom_\C(X,Y) \to \Hom_{\PSh(\C)}(h_X,h_Y)$
+  induced by $h$ is a bijection.
+\end{proof}
+
+\begin{remark}
+  In light of (\ref{yoneda-embedding}), we call $h$ the \textit{Yoneda
+    embedding}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Some magic}
+
+We review the notion of a fibre product, the discussion of which in
+\cite{gortzwedhorn} being what prompted these notes in the first
+place. Throughout we let $u : X \to S$ and $v : Y \to S$ two morphisms
+in $\C$.
+
+\begin{definition}
+The \textit{fibre product of $X$ and $Y$ over $S$} is an object $X
+\times_S Y \in \Obj(\C)$ equipped with \textit{projections} $p : X
+\times_S Y \to X$ and $q : X \times_S Y \to Y$ satisfying:
+\begin{enumerate}
+\item $u \circ p = v \circ q$, and
+\item for any $T \in \Obj(\C)$ and morphisms $a : T \to X$ and $b : T
+  \to Y$ such that $u \circ a = v \circ b$, there exists a unique
+  morphism $a \times b : T \to X \times_S Y$ such that $a = p \circ (a
+  \times b)$ and $b = q \circ (a \times b)$.
+\end{enumerate}
+This is encapuslated by the following diagram:
+\[
+\begin{tikzcd}
+  T \ar[bend left]{rrd}{b} \ar[bend right]{ddr}{a}
+  \ar[dashed]{dr}{\exists!\, a \times b} & & \\ & X \times_S Y \rar{q}
+  \dar{p} & Y \dar{v} \\ & X \rar{u} & S.
+\end{tikzcd}
+\]
+For the usual reasons, this characterises $X \times_S Y$ up to
+(unique) isomorphism.
+
+One more bit of terminology: if we have the data in (2) such that $c$
+is moreover an isomorphism---that is, $T$ equipped with $a,b$ is in
+fact a fibre product of $X$ and $Y$ over $S$---we say the commutative
+square
+\[
+\begin{tikzcd}
+  T \rar{b} \dar{a} & Y \dar{v} \\ X \rar{u} & S
+\end{tikzcd}
+\]
+is \textit{cartesian}, or a \textit{pullback diagram}.
+\end{definition}
+
+\begin{example}
+  It is easy to see that fibre products exist in the category
+  $\Set$. Indeed, they're exactly what you expect them to be (check
+  that this construction satisfies the universal property above):
+  \[
+  X \times_S Y \simeq \{(x, y) \mid x \in X, y \in Y, u(x) = v(y)\}.
+  \]
+  On the other hand, it can be much more difficult to understand fibre
+  products in other categories in this concrete set-theoretic manner
+  (e.g., the category of schemes, where fibre products are incredibly
+  prevalent). Indeed, as with other universal constructions, it is
+  often much easier to work with the fibre product abstractly. But
+  here's another way to work with it: the Yoneda embedding magically
+  lets us reduce things to the familiar category $\Set$!  Let's see
+  what I mean.
+\end{example}
+
+\begin{lemma}
+  \label{magic}
+  An object $Z \in \Obj(\C)$ equipped with $p : Z \to X$ and $q : Z \to
+  Y$ is a fibre product of $X$ and $Y$ over $S$ if and only if the
+  diagram (in the category $\Set$)
+  \[
+  \begin{tikzcd}
+    \Hom_\C(T, Z) \rar{h_q} \dar{h_p} & \Hom_\C(T, Y) \dar{h_v}
+    \\ \Hom_\C(T,X) \rar{h_u} & \Hom_\C(T,S).
+  \end{tikzcd}
+  \]
+  is commutative and cartesian, i.e., for all $T \in \Obj(\C)$ we have
+  \[
+  \Hom_\C(T,Z) \simeq \Hom_\C(T,X) \times_{\Hom_\C(T,S)}
+  \Hom_\C(T,Y).
+  \]
+\end{lemma}
+
+\begin{proof}
+  The condition that the diagram commutes is equivalent to the
+  condition that $u \circ p = v \circ q$ since the Yoneda embedding is
+  fully faithful. And, just by staring at things for long enough, we
+  see that saying
+  \begin{align*}
+  \Hom_\C(T,Z) &\simeq \Hom_\C(T,X) \times_{\Hom_\C(T,S)} \Hom_\C(T,Y)
+  \\ &\simeq \{(a, b) \mid a : T \to X, b : T \to Y, u \circ a = v
+  \circ b\}
+  \end{align*}
+  is equivalent to saying that $Z$ satisfies the necessary universal
+  property.
+\end{proof}
+
+\begin{remark}
+  The above lemma is a great example of a tautology, albeit wrapped in
+  formalism. The point is that saying we have a cartesian square in
+  $\C$ and saying the Yoneda embedding of the square is cartesian in
+  $\Set$ are really precisely the same statement: to give a map into
+  $X \times_S Y$ is to give maps into $X$ and $Y$ which induce the
+  same map into $S$.
+\end{remark}
+
+Ok, so that's what I mean when I say the Yoneda embedding reduces us
+to talking about sets. Let's see it in action (briefly).
+
+\begin{lemma}
+  For all morphisms $S \to T$ the diagram
+  \[
+  \begin{tikzcd}
+    X \times_S Y \rar{p \times q} \ar{d}[left]{u \circ p = v \circ q}
+    & X \times_T Y \dar{u \times v} \\ S \rar{\id_S \times \id_S} & S
+    \times_T S
+  \end{tikzcd}
+  \]
+  is commutative and cartesian, assuming all the fibre products
+  written exist. That is, $X \times_S Y \simeq S \times_{S \times_T S}
+  (X \times_T Y)$.
+\end{lemma}
+
+\begin{proof}
+  We are reduced to the case that $\C = \Set$ immediately by
+  (\ref{magic})! In this case, as you can check, our concrete
+  description of the fibre product makes the claim obvious!
+\end{proof}
+
+Observe that this last proof was two sentences, each ending with an
+exclamation point. I seriously feel like this Yoneda trick is magic
+here. Sure, one can argue completely abstractly using only the
+universal properties of all the fibre products written down---that's
+how I proved this the first time I saw it---but this is just so much
+cleaner and intuitive, I think!
+
+\begin{remark}
+  As an aside, this last lemma is actually pretty useful. It implies
+  for instance in the category of schemes that if $S \to T$ is
+  separated then, by stability under base change, $X \times_S Y \to X
+  \times_T Y$ (note the graph morphism is a special case of this) is a
+  closed immersion.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{amsalpha}
+\bibliography{/Users/arpon/Documents/grain/refs/math}
+
+\end{document}
