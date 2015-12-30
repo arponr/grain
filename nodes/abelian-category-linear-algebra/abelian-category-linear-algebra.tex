@@ -1,0 +1,82 @@
+\input{preamble}
+
+\title{Linear algebra in an abelian category}
+\author{Arpon Raksit}
+\date{December 29, 2015}
+
+\numberwithin{equation}{section}
+\cspreto{section}{\setcounter{equation}{0}}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Throughout, let $\cA$ be an abelian category.
+
+\section{(Semi)simplicity and Schur's lemma}
+
+\begin{definition}
+  \label{simple}
+  A nonzero object $M \in \cA$ is called \emph{simple} if it has no non-trivial subobjects, i.e. any monomorphism $M' \inj M$ is either an isomorphism or the zero map $0 \inj M$.
+\end{definition}
+
+\begin{definition}
+  \label{semisimple}
+  \begin{enumerate}
+  \item An object $X \in \cA$ is said to be \emph{semisimple} if it is a direct sum of finitely many simple objects.
+  \item We say the entire category $\cA$ is \emph{semisimple} if all objects in $\cA$ are semisimple.
+  \end{enumerate}
+\end{definition}
+
+\begin{lemma}[Schur]
+  \label{schur-lemma}
+  Let $M, N \in \cA$ be simple objects. Then any morphism $T \c M \to N$ is either zero or an isomorphism.
+\end{lemma}
+
+\begin{proof}
+  Consider the subobjects $i \c \ker(T) \inj M$ and $j \c \im(T) \inj N$. Since $M,N$ are simple each of $i$ and $j$ is either zero or an isomorphism. If $i$ is an isomorphism or $j$ is zero then $T$ is zero. Otherwise $i$ is zero and $j$ is an isomorphism, in which case $T$ is an isomorphism.
+\end{proof}
+
+\begin{corollary}
+  \label{schur-corollary}
+  Let $k$ be a commutative ring, and suppose $\cA$ is equipped with the structure of a $k$-linear category.
+  \begin{enumerate}
+  \item \label{schur-division-algebra} Let $M \in \cA$ be a simple object. Then the $k$-algebra $\End_\cA(M)$ is a division algebra.
+  \item \label{schur-alg-closed} Assume $k$ is an algebraically closed field. Let $M \in \cA$ be a simple object such that $\End_\cA(M)$ is finite-dimensional over $k$. Then every endomorphism of $M$ is multiplication by a scalar, i.e. the canonical map
+    \[
+      k \to \End_\cA(M), \quad a \mapsto a \cdot \id_M
+    \]
+    is an isomorphism.
+  \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+  \cref{schur-division-algebra} is a restatement of \cref{schur-lemma}, and \cref{schur-alg-closed} follows from \cref{schur-division-algebra} once you recall that the only finite-dimensional division algebra over an algebraically closed field $k$ is $k$ itself.
+\end{proof}
+
+\begin{proposition}
+  \label{semisimple-iff-split}
+  $\cA$ is semisimple if and only if all objects in $\cA$ have finite length and every short exact sequence in $\cA$ splits.
+\end{proposition}
+
+\begin{proof}
+  ($\shimplied$) We want to show any $X \in \cA$ is semisimple. We induct on the length of $X$ (finite by hypothesis). The cases $\lg(X) = 0$ (i.e. $X \iso 0$) and $\lg(X) = 1$ (i.e. $X$ simple) are tautological. If $\lg(X) > 1$ then we can choose a simple subobject $X' \inj X$ and consider the resulting short exact sequence
+  \[
+    0 \to X' \to X \to X'' \to 0.
+  \]
+  By hypothesis this splits. Since $X'$ is simple, this reduces the semisimplicity of $X$ to the semisimplicity of $X''$. But $\lg(X'') = \lg(X) - 1$ so we're done by induction.
+
+  ($\shimplies$) Obviously if $X \in \cA$ is semisimple then it has finite length. So suppose given a short exact sequence
+  \[
+    0 \to X' \to X \to X'' \to 0.
+  \]
+  By hypothesis we may write $X \iso \bigoplus_{i \in I} X_i$ and $X' \iso \bigoplus_{j \in J} X'_j$ where $I,J$ are finite sets and the $X_i,X'_j$ are simple. Then the inclusion $\phi \c X' \to X$ is given by a matrix of maps $\phi_{i,j} \c X'_j \to X_i$, each of which is either zero or an isomorphism by Schur's lemma \cref{schur-lemma}. Since $\phi$ is injective each $\phi_{i,j}$ must in fact be an isomorphism. I.e. we may take $J \subseteq I$ and $X'_j \iso X_j$. Then there's an obvious projection $X \to X'$ splitting the sequence.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}

@@ -86,7 +86,7 @@
 
 \cspreto{section}{\setcounter{equation}{0}}
 
-\titleformat{\section}{\fontseries{b}\selectfont}{\S\thesection.}{0.4em}{}
+\titleformat{\section}{\centering\scshape}{\thesection.}{0.4em}{}
 \titlespacing{\section}{0pt}{*4}{*1}
 \titleformat{\subsection}{\scshape}{\thesubsection.}{0.4em}{}
 \titlespacing{\subsection}{0pt}{*2.5}{*1}
@@ -125,9 +125,9 @@
 
 \makeatletter
 
-\newcommand{\thmnumfont}{\fontseries{b}\selectfont}
-\newcommand{\thmheadfont}{\fontseries{b}\selectfont}
-\newcommand{\thmnotefont}{\fontseries{b}\selectfont}
+\newcommand{\thmnumfont}{\bfseries}
+\newcommand{\thmheadfont}{\bfseries}
+\newcommand{\thmnotefont}{\bfseries}
 \newcommand{\thmhorizspace}{0.4em}
 \newcommand{\thmlabelspace}{0.25em}
 \newcommand{\thmnotespace}{0.25em}
@@ -195,7 +195,7 @@
 
 \setlist{%
   parsep=0ex, listparindent=\parindent,
-  itemsep=1.0ex, topsep=1.0ex,%
+  itemsep=0.75ex, topsep=0.75ex,%
 }
 
 \setlist[enumerate, 1]{%
@@ -395,12 +395,15 @@
 \newcommand{\dual}{\vee}
 \newcommand{\ldb}{\llbracket}
 \newcommand{\rdb}{\rrbracket}
+\newcommand{\shimplies}{\Rightarrow}
+\newcommand{\shimplied}{\Leftarrow}
 
 \newcommand{\Obj}{\operatorname{Obj}}
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\Map}{\operatorname{Map}}
 \newcommand{\Fun}{\operatorname{Fun}}
 \newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\End}{\operatorname{End}}
 \newcommand{\Iso}{\operatorname{Iso}}
 \renewcommand{\id}{\mathrm{id}}
 \renewcommand{\im}{\operatorname{im}}
