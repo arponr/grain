@@ -34,7 +34,6 @@
 %   bb=boondox, bbscaled=0.98,%
 % ]{mathalfa}
 \usepackage{cleveref}
-\usepackage{xr}
 
 \frenchspacing
 \urlstyle{rm}
@@ -84,6 +83,8 @@
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cspreto{section}{\setcounter{equation}{0}}
 
 \titleformat{\section}{\centering\scshape}{\thesection.}{0.4em}{}
 \titlespacing{\section}{0pt}{*4}{*1}
@@ -191,86 +192,6 @@
 \defthm{remarks}{Remarks}
 \defthm{situtation}{Situation}
 \defthm{theorem}{Theorem}
-
-\makeatletter
-\long\def\XR@test#1#2#3#4\XR@{%
-  \ifx#1\newlabel
-    \xr@cref#2@cref\relax#3\@nil
-  \else\ifx#1\@input
-     \edef\XR@list{\XR@list#2\relax}%
-  \fi\fi
-  \ifeof\@inputcheck\expandafter\XR@aux
-  \else\expandafter\XR@read\fi}
-
-\def\xr@@cref{@cref}
-\def\xr@cr@add#1{{[\XR@prefix\@gobble#1}}
-\def\xr@cref#1@cref#2\relax#3\@nil{%
-\def\tmp{#2}%
-\ifx\tmp\xr@@cref
-  \edef\tmp{\noexpand\newlabel{\XR@prefix#1@cref}{\xr@cr@add#3}}%
-  \tmp
-\else
- \newlabel{\XR@prefix#1}{#3}%
-\fi
-}
-\makeatother
-
-% Display format for equations
-\newcommand{\externalcrefeqfmt}[2]{
-  \crefformat{#1:#2}{[\texttt{#1}, ##2##1##3]}
-  \Crefformat{#1:#2}{[\texttt{#1}, ##2##1##3]}
-  \crefrangeformat{#1:#2}{[\texttt{#1}, ##3##1##4--##5##2##6]}
-  \Crefrangeformat{#1:#2}{[\texttt{#1}, ##3##1##4--##5##2##6]}
-  \crefmultiformat{#1:#2}{[\texttt{#1}, ##2##1##3}{, ##2##1##3]}{, ##2##1##3}{, ##2##1##3]}
-  \Crefmultiformat{#1:#2}{[\texttt{#1}, ##2##1##3}{, ##2##1##3]}{, ##2##1##3}{, ##2##1##3]}
-  \crefrangemultiformat{#1:#2}{[\texttt{#1}, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}
-  \Crefrangemultiformat{#1:#2}{[\texttt{#1}, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}
-}
-% Display format for sections
-\newcommand{\externalcrefsecfmt}[2]{%
-  \crefformat{#1:#2}{[\texttt{#1}, \S##2##1##3]}
-  \Crefformat{#1:#2}{[\texttt{#1}, \S##2##1##3]}
-  \crefrangeformat{#1:#2}{[\texttt{#1}, \S\S##3##1##4--##5##2##6]}
-  \Crefrangeformat{#1:#2}{[\texttt{#1}, \S\S##3##1##4--##5##2##6]}
-  \crefmultiformat{#1:#2}{[\texttt{#1}, \S\S##2##1##3}{ and~##2##1##3]}{, ##2##1##3}{ and~##2##1##3]}
-  \Crefmultiformat{#1:#2}{[\texttt{#1}, \S\S##2##1##3}{ and~##2##1##3]}{, ##2##1##3}{ and~##2##1##3]}
-  \crefrangemultiformat{#1:2}{[\texttt{#1}, \S\S##3##1##4--##5##2##6}{ and~##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{ and~##3##1##4--##5##2##6]}
-  \Crefrangemultiformat{#1:#2}{[\texttt{#1}, \S\S##3##1##4--##5##2##6}{ and~##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{ and~##3##1##4--##5##2##6]}
-}
-
-\newcommand{\GRAINROOT}{/Users/arpon/Documents/grain}
-\newcommand{\externalgrain}[1]{
-  \externaldocument[#1:]{\GRAINROOT /nodes/#1/#1}
-  
-  \externalcrefeqfmt{#1}{algorithm}
-  \externalcrefeqfmt{#1}{conjecture}
-  \externalcrefeqfmt{#1}{construction}
-  \externalcrefeqfmt{#1}{convention}
-  \externalcrefeqfmt{#1}{corollary}
-  \externalcrefeqfmt{#1}{definition}
-  \externalcrefeqfmt{#1}{definitions}
-  \externalcrefeqfmt{#1}{example}
-  \externalcrefeqfmt{#1}{examples}
-  \externalcrefeqfmt{#1}{exercise}
-  \externalcrefeqfmt{#1}{fact}
-  \externalcrefeqfmt{#1}{intuition}
-  \externalcrefeqfmt{#1}{lemma}
-  \externalcrefeqfmt{#1}{notation}
-  \externalcrefeqfmt{#1}{nothing}
-  \externalcrefeqfmt{#1}{proposition}
-  \externalcrefeqfmt{#1}{question}
-  \externalcrefeqfmt{#1}{remark}
-  \externalcrefeqfmt{#1}{remarks}
-  \externalcrefeqfmt{#1}{situtation}
-  \externalcrefeqfmt{#1}{theorem}
-
-  \externalcrefeqfmt{#1}{equation}
-  \externalcrefeqfmt{#1}{enumi}
-  \externalcrefeqfmt{#1}{enumii}
-  \externalcrefsecfmt{#1}{section}
-  \externalcrefsecfmt{#1}{subsection}
-  \externalcrefsecfmt{#1}{appendix}
-}
 
 \setlist{%
   parsep=0ex, listparindent=\parindent,
@@ -471,7 +392,7 @@
 \newcommand{\ce}{\mathrel{:=}}%{\coloneq}
 \newcommand{\ec}{\mathrel{=:}}%{\eqcolon}
 \newcommand{\iso}{\simeq}
-\newcommand{\dual}[1]{#1^\vee}
+\newcommand{\dual}{\vee}
 \newcommand{\ldb}{\llbracket}
 \newcommand{\rdb}{\rrbracket}
 \newcommand{\shimplies}{\Rightarrow}

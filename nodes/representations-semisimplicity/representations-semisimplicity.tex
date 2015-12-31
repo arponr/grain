@@ -1,0 +1,55 @@
+\input{preamble}
+
+\title{Semisimplicity of representations}
+\author{Arpon Raksit}
+\date{December 30, 2015}
+
+\externalgrain{abelian-category-linear-algebra}
+
+\begin{document}
+\maketitle
+
+\newcommand{\chr}{\operatorname{char}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $k$ be a field. Let $\cA$ be an abelian $k$-linear category. Let $G$ be a finite group such that $\chr(k)$ does not divide $|G|$. Denote by $\cA^G$ the (abelian $k$-linear) category of $G$-representations in $\cA$, i.e. the functor category $[\rB G, \cA]$.
+
+\begin{lemma}[Averaging trick]
+  \label{avg-trick}
+  Suppose all short exact sequences in $\cA$ split. Then the same is true in $\cA^G$.
+\end{lemma}
+
+\begin{proof}
+  Consider a short exact sequence
+  \[
+    0 \to X' \to X \to X'' \to 0,
+  \]
+  in $\cA^G$. This is a short exact sequence when viewed in $\cA$ as well, so by hypothesis there is a splitting $T \c X'' \to X$ in $\cA$. Then the average
+  \[
+    \frac{1}{|G|} \sum_{g \in G} gTg^{-1}
+  \]
+  is a morphism $X'' \to X$ in $\cA^G$ which also splits the sequence. (Note that this average makes sense by our hypothesis that $\chr(k)$ does not divide $|G|$.)
+\end{proof}
+
+\begin{proposition}
+  \label{semisimple}
+  Suppose $\cA$ is semisimple. Then $\cA^G$ is semisimple.
+\end{proposition}
+
+\begin{proof}
+  Recall \cref{abelian-category-linear-algebra:semisimple-iff-split} that $\cA$ being semisimple is equivalent to all short exact sequences in $\cA$ splitting and all objects in $\cA$ having finite length. For an object in $\cA^G$ we'll refer to its length in $\cA$ as its \emph{$\cA$-length}.
+
+  Now, we wish to show any nonzero $X \in \cA^G$ is semisimple. We induct on its $\cA$-length. We may choose a nonzero subobject $\phi \c X' \inj X$ in $\cA^G$ of  minimal $\cA$-length. Clearly $X'$ must be simple in $\cA^G$. If $\phi$ is an isomorphism then we're done. Otherwise, consider the short exact sequence
+  \[
+    0 \to X' \to X \to X'' \to 0
+  \]
+  in $\cA^G$. By \cref{avg-trick} it splits. Since $X'$ is simple this reduces the semisimplicity of $X$ to the semisimplicity of $X''$. But $X''$ has strictly smaller $\cA$-length than $X$ so we're done by induction.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}

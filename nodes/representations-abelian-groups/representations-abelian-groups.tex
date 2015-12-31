@@ -1,0 +1,59 @@
+\input{preamble}
+
+\title{Representations of abelian groups}
+\author{Arpon Raksit}
+\date{December 30, 2015}
+
+\externalgrain{abelian-category-linear-algebra}
+\externalgrain{representations-semisimplicity}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $k$ be an algebraically closed field. Let $\cA$ be an abelian $k$-linear category. Let $G$ be an abelian group and let $\cA^G$ denote the category of $G$-representations in $\cA$, i.e. the functor category $[\rB G, \cA]$ (which is also obviously abelian and $k$-linear in a natural way).
+
+\begin{proposition}
+  \label{simple-impl-char}
+  Let $M$ be a simple object in $\cA^G$. Then there's a character $\lambda \c G \to k^\times$ such that the action of $G$ on $M$ is given by multiplication by $\lambda$.
+\end{proposition}
+
+\begin{proof}
+  The claim is simply that the action $\gamma(g) \in \End_\cA(M)$ of each $g \in G$ is a multiple $\lambda(g) \in k$ of the identity. Since $G$ is abelian we have
+  \[
+    \gamma(g)\gamma(h) = \gamma(gh) =
+    \gamma(hg) = \gamma(h)\gamma(g)
+  \]
+  for all $h \in H$. I.e. $\gamma(g)$ is also a morphism of representations. The claim then follows from the formulation of Schur's lemma \cref{abelian-category-linear-algebra:schur-alg-closed} stating that $M$ being simple implies its only endomorphisms are multiplication by scalars.
+\end{proof}
+
+\begin{remark}
+  \label{simple-impl-simple}
+  It follows immediately from \cref{simple-impl-char} that if $M$ is simple in $\cA^G$ then $M$ is also simple when viewed as an object in $\cA$.
+\end{remark}
+
+\begin{corollary}
+  \label{isotypic}
+  Assume $\cA$ is semisimple. Then any representation $M \in \cA^G$ has an \emph{isotypic decomposition}
+  \[
+    M \iso \bigoplus_{\lambda \in \dual G} M_\lambda,
+  \]
+  where for $\lambda \in \dual G$ the representation $M_\lambda \in \cA^G$ is acted on by $G$ via $\lambda$, i.e. for $g \in G$ the action $g \c M_\lambda \to M_\lambda$ is given by multiplication by $\lambda(g)$.
+\end{corollary}
+
+\begin{proof}
+  Since $\cA$ is semisimple, by \cref{representations-semisimplicity:semisimple} we know that $\cA^G$ is semisimple. Thus any $M \in \cA^G$ is a direct sum of simple objects. The claim now follows from \cref{simple-impl-char}.
+\end{proof}
+
+\begin{remark}
+  \label{isotypic-unique}
+  Note that the isotypic decomposition provided by \cref{isotypic} is automatically unique: for $\lambda \in \dual G$ we can recover $M_\lambda$ as the kernel of the map $M \to \bigoplus_{g \in G} M$ which on the factor indexed by $g \in G$ is given by multiplication by $1 - \lambda(g)$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}
