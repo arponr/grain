@@ -1,4 +1,6 @@
-# Introduction
+# Transcendence in Infinite Jest
+
+## Introduction
 
 One needs only reach the twelfth page of *Infinite Jest* to be confronted with philosophy: Hal's very first utterances express his beliefs that "the influence of Kierkegaard on Camus is underestimated", that "Hobbes is just Rousseau in a dark mirror", and "with Hegel, that transcendence is absorption". It is my belief that these statements are not simply supercilious name-dropping (either on Hal's or David Foster Wallace's part), but serious hints that central aspects of the novel should be understood in a philosophical context. This essay works towards justifying this belief using (a few of) the remaining 1067 pages of the text, specifically focusing on this notion of *transcendence* which Hal immediately refers to.
 
@@ -8,7 +10,7 @@ inspired by Immanuel Kant's concept of the individual's "transcendental" a prior
 In what follows I argue that we may understand *Infinite Jest*'s philosophy of transcendence through the concept's existential and transcendental manifestations, and then apply this understanding to shed a bit of light on the mystery of two characters in the novel, Lyle and Hal.
 
 
-# Transcendence
+## Transcendence
 
 To give grounds for the relevance of existential philosophy in the novel it suffices to consider the story at its highest level (both geographically and conceptually), namely in Marathe and Steeply's discussion on America. At the center of their discourse is "freedom! ... as if it were obvious to all people what it wants to mean, this word. But look: it is not so simple as that. Your freedom is the freedom-*from* ... But what of the freedom-*to*? Not just
 free-*from*. ... How for the person to freely choose?" (320). Marathe's questions here fit very nicely into the framework of existentialism, articulating Sartre's conception of transcendence, that human freedom is a responsibility, condition, and limitation in relating to the world.
@@ -26,7 +28,7 @@ Schtitt's mention of the infinite and emphasis on the self as a limit indicate a
 The above evinces the following picture of transcendence in *Infinite Jest*: the self is a boundary between and limit of the infinity of sentiment within and the infinity of the world without, and true transcendence is the transcendence of this boundary, the ability to interface honestly with the world. This transcendence involves both recognizing the inner infinity---transcending one's facticity as a human being with attitudes and feelings---and the outer infinity---turning one's transcendence on the other facticities of the world, connecting to the human s/State. This sits in contradistinction to trascendentalism, which the novel depicts not as the erasure of this boundary or transcendence of this limit, but as a false, ironic rejection of the inner emotion and pure consumption (or ingestion) of the outer world.
 
 
-# Lyle
+## Lyle
 
 While *Infinite Jest*'s philosophy of transcendence is best verbally expressed by Schtitt, I believe it is best embodied by Lyle, whose mystery is apparent from his first description:
 
@@ -38,7 +40,7 @@ But his transcendence runs far deeper than these images. His entire role at E.T.
 
 In light of this I want to interpret a couple of perplexing details about Lyle. The first is his advice to Ortho Stice: "Do not underestimate objects! Lyle says he finds it impossible to overstress this: do *not* underestimate objects" (394). This reflects the idea that in transcending one's facticity, one must not disregard facticity all together; i.e. one must actively relate to the objects in the world to avoid getting lost in the self. This then supports the idea that the unexplained misplacement of objects in E.T.A., including Stice's bed, are an attempt by James Incandenza to draw Hal out of his self, to have Hal actually open himself to the world and its objects. The second is the fact that the back of Lyle's "TRANSCEND" tank top reads "DEUS PROVIDEBIT", i.e. "GOD WILL PROVIDE". This hints at the significance of faith and worship in the novel's conception of transcendence. This is expressed by Marathe as well: "Our attachments are our temple, what we worship, no? What we give ourselves to, what we invest with faith." Lyle's position as an essentially religious guru points at the idea that connection between one's honest emotions and the infinity of the human s/State outside the self relies on an essentially religious faith in some sort of god.
 
-# Hal
+## Hal
 
 Finally we turn to Hal. These days the term "existential angst" evokes the image of a clichéd sullen teenager lying in bed in a dark room, clichéd melancholy alternative rock drowning out clichéd parental yelling through the door. Maybe Hal isn't so extremely clichéd but he's still a teenager wrestling with the idea that "inside [him] there's pretty much nothing at all, he knows. His Moms Avril hears her own echoes inside him and thinks what she hears is him, and this makes Hal feel the one thing he feels to the limit, lately: he is lonely" (694). While it would be easy to cynically cast aside this emptiness and loneliness as teenage naivete, *Infinite Jest* suggests that "the cliché 'I don't know who I am' unfortunately turns out to be more than a cliché" (204), and should be considered in the light of the serious philosophy from which existential angst originated.
 
@@ -52,6 +54,6 @@ The mechanics and conditioning he "transcends" are precisely his facticity. The 
 
 This is the real (but not unsatisfying) sense for me in which *Infinite Jest* does not finish: we are left with an incompletely transformed, untranscended Hal, one which reflects the deep loneliness in the incredible difficulty of both recognizing the infinity within the self and transcending the boundary (the self) between this infinity and the infinities of others.
 
-# References
+## References
 
 - David Foster Wallace, *Infinite Jest*, Back Bay Books, 1996.

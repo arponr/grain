@@ -1,0 +1,3 @@
+A key idea in *Atocha* is the effect of stories on real life, in particular for writers. Cigarettes serve primarily as narrative instruments. Adam tries to manipulate Isabel into thinking his experiences with her will be the material for new poetry.
+
+I'm feeling too lazy at this juncture to do a good job writing these notes. But the general point is that, especially as a writer, there is a very prevalent tendence of looking at our real experiences as though it is a story to be later told, and in this process we remove ourself from the experience. This is of course tied to Adam's problems of self-awareness and authenticity.
