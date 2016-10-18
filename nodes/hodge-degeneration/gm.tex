@@ -1,0 +1,176 @@
+\section{The Gauss-Manin connection}
+\label{gm}
+
+In \cref{degen} we studied the structure of the algebraic de Rham cohomology of a smooth proper $k$-scheme for $k$ a field. In this section we shift our focus to the behavior of algebraic de Rham cohmology in families. That is, we consider the following relative situation, where we generalize from working over a field $k$ to an arbitrary base scheme $S$.
+
+\begin{definition}
+  \label{gm--relative-algebraic-derham}
+  Let $f \c X \to S$ be a map of schemes. We define the \emph{relative de Rham cohomology} as the derived pushforward sheaves
+  \[
+    \rH^*_{\dR}(X/S) \ce \rR^*f_*\Omega^\bullet_{X/S}.
+  \]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Local systems and flat connections}
+\label{gm--local}
+
+Let us again motivate what structure to look for algebraically by first examining some features of the situation from the analytic perspective. So let $f \c \sX \to \sS$ be a proper holomorphic submersion between complex manifolds (or, equivalently, a smooth, proper map between smooth complex-analytic spaces).
+
+\begin{definition}
+  \label{gm--local--derham}
+  There is a \emph{relative de Rham complex} $\Omega_{\sX/\sS}^\bullet$ of locally free sheaves on $\sX$ (which may be defined in the context of complex-analytic spaces via the diagonal map $\sX \to \sX \times_\sS \sX$ in precisely the same way as for schemes) and we may analogously define the \emph{relative de Rham cohomology} as the derived pushforward sheaves
+  \[
+    \rH^*_{\dR}(\sX/\sS) \ce \rR^*f_*\Omega^\bullet_{\sX/\sS}.
+  \]
+\end{definition}
+
+Note that the absolute setting we began with in \cref{intro} is recovered by taking $\sS$ to be the trivial base, i.e. a point with structure sheaf $\lC$. We saw in \cref{intro--hodge--holomorphic-derham-iso} that in the absolute case de Rham cohomology computes complex cohomology, as the de Rham complex is a resolution of the constant sheaf $\u\lC$ by the holomorphic Poincar\'e lemma. It is natural to wonder if there is a relative generalization.
+
+\begin{question}
+  \label{gm--local--derham-complex}
+  How is relative de Rham cohomology $\rH^*_\dR(\sX/\sS)$ related to relative complex cohomology $\rR^*f_*\u\lC$? Are they equivalent? Do they determine each other?
+\end{question}
+
+To answer these questions, let us first investigate the nature of $\rR^*f_*\u\lC$. We need to recall two topological features enjoyed by the map $f$.
+
+\begin{proposition}[Topological proper base change]
+  \label{gm--local--base-change}
+  Suppose $g \c Y \to T$ is a proper map of locally compact Hausdorff topological spaces. Let $\sF$ be a sheaf of abelian groups on $Y$. Then for any point $t \in T$, we have a canonical isomorphism
+  \[
+    (\rR^*f_*\sF)_t \iso \rH^*(X_t; \sF|_{X_t}),
+  \]
+  where the left-hand side is the stalk of the derived pushforward of $\sF$, and the right-hand side is the cohomology of the restriction of $\sF$ to the fiber $X_t \ce f^{-1}(t)$.
+\end{proposition}
+
+\begin{proposition}[Ehresmann]
+  \label{gm--local--ehresmann}
+  Any (smooth) proper submersion between smooth manifolds is a locally trivial fibration, i.e. a fiber bundle.
+\end{proposition}
+
+\begin{nothing}
+  \label{gm--local--relative-complex}
+  Applying \cref{gm--local--base-change} to our map $f \c \sX \to \sS$ and the constant sheaf $\u\lC$ on $X$ tells us that the stalks of $\rR^*f_*\u\lC$ are given by the complex cohomology of the fibers of $f$; since $f$ is proper, the fibers of $f$ are compact, hence these stalks are finite dimensional $\lC$ vector spaces. Then \cref{gm--local--ehresmann} tells us that the fibers of $f$ over any connected component of $\sS$ are all homeomorphic, and hence all have isomorphic complex cohomology. In summary, we see that $\rR^*f_*\u\lC$ is a locally constant sheaf of finite-dimensional $\lC$-vector spaces, i.e. a \emph{local system of $\lC$-vector spaces}, with value given by the complex cohomology of the fibers of $f$.
+\end{nothing}
+
+Let's now investigate the nature of $\rH^*_\dR(\sX/\sS)$. The key to understanding this will be the role that the relative de Rham complex $\Omega_{\sX/\sS}^\bullet$ plays in the theory of connections, together with the relationship of the theory of connections to the theory of local systems, known as the Riemann-Hilbert correspondence. We briefly summarize the story; see Deligne for details.
+
+\begin{definition}
+  \label{gm--local--connection}
+  Let $\sF$ be a vector bundle (i.e. locally free sheaf of finite rank) on $\sX$. A \emph{connection relative to $\sS$} on $\sF$ is a map of sheaves of abelian groups
+  \[
+    \nabla \c \sF \to \Omega_{\sX/\sS}^1 \otimes_{\sO_X} \sF
+  \]
+  satisfying the Lebniz rule $\nabla(as) = da \otimes s + a\nabla(s)$ for all local sections $a$ of $\sO_X$ and $s$ of $\sF$, where $d \c \sO_X \to \Omega_{\sX/\sS}^1$ is the differential.
+
+  Just as we may extend the differential $d$ to form the de Rham complex $\Omega_{\sX/\sS}^\bullet$, such a connection $\nabla$ uniquely determines maps of sheaves of abelian groups
+  \[
+    \nabla^p \c \Omega_{\sX/\sS}^p \otimes_{\sO_X} \sF \to \Omega_{\sX/\sS}^{p+1} \otimes_{\sO_X} \sF
+  \]
+  for $p \ge 0$, satisfying $\nabla^p(\omega \otimes s) = d\omega \otimes s + (-1)^p \omega \wedge \nabla(s)$ for local sections $\omega$ of $\Omega_{\sX/\sS}^p$ and $s$ of $\sF$. However, it is not always true that these maps form a cochain-complex. It turns out that this is true if and only if $\nabla^1 \circ \nabla^0 = 0$, in which case we say that the connection $\nabla$ is \emph{flat} and call this cochain-complex the \emph{de Rham complex} of $\sF$, denoted $\Omega_{\sX/\sS}^\bullet(\sF)$
+\end{definition}
+
+\begin{definition}
+  \label{gm--local--local-system}
+  A \emph{local system relative to $\sS$} on $\sX$ is a locally free $f^{-1}\sO_\sS$-module of finite rank on $\sX$. In the case that $\sS$ is the trivial base, this is simply a locally constant sheaf of finite dimensional $\sC$-vector spaces, which, as above, we also refer to as a \emph{local system of $\lC$-vector spaces} on $\sX$.
+\end{definition}
+
+\begin{nothing}
+  \label{gm--local--local-system-to-connection}
+  Suppose $\sL$ is a local system relative to $\sS$ on $\sX$. Then $\sF \ce \sO_X \otimes_{f^{-1}\sO_\sS} \sL$ is a vector bundle on $\sX$. Observe that
+  \[
+    \Omega_{\sX/\sS}^1 \otimes_{\sO_\sX} \sF \iso
+    \Omega_{\sX/\sS}^1 \otimes_{f^{-1}\sO_\sS} \sL,
+  \]
+  so that
+  \[
+    d \otimes \id_\sL \c \sO_X \otimes_{f^{-1}\sO_\sS} \sL \to \Omega_{\sX/\sS}^1 \otimes_{f^{-1}\sO_\sS} \sL
+  \]
+  defines a canonical connection $\nabla \c \sF \to \Omega_{\sX/\sS}^1 \otimes_{\sO_\sX} \sF$. Since $d^2 = 0$ it is clear that $\nabla$ is flat. And since $f$ is smooth we have $\ker d \iso f^{-1}\sO_\sS$, which implies $\ker \nabla = \sL$ since $\sL$ is locally free over $f^{-1}\sO_\sS$.
+\end{nothing}
+
+The Riemann-Hilbert correspondence tells us that this construction producing a vector bundle with flat connection out of a local system is invertible.
+
+\begin{theorem}[Riemann-Hilbert correspondence]
+  \label{gm--local--riemann-hilbert}
+  Let $\sF$ be a vector bundle on $\sX$ equipped with a flat connection $\nabla$ relative to $\sS$. Then the sheaf $\sL \ce \ker \nabla$ is a local system relative to $\sS$ on $\sX$, and moreover $\sF$ is canonically isomorphic to the canonical vector bundle with flat connection associated to $\sL$ in \cref{gm--local--local-system-to-connection}.
+\end{theorem}
+
+We also have relative generalization of the holomorphic Poincar\'e lemma.
+
+\begin{proposition}
+  \label{gm--local--poincare}
+  Let $\sL$ be a local system relative to $\sS$ on $\sX$. Let $\sF$ be the associated vector bundle with flat connection \cref{gm--local--local-system-to-connection}. Then the de Rham complex $\Omega_{\sX/\sS}^\bullet(\sF)$ is a resolution of $\sL$.
+\end{proposition}
+
+\begin{nothing}
+  \label{gm--local--final}
+  Consider the local system $f^{-1}\sO_S$ relative to $\sS$ on $\sX$. The associated vector bundle with flat connection is simply $\sO_X$ equipped with the canonical differential, which has de Rham complex the usual de Rham complex $\Omega_{\sX/\sS}^\bullet$. It follows from the above that we have the following reformulation of relative de Rham cohomology:
+  \[
+    \rH_{\dR}^*(\sX/\sS) \iso \rR^*f_*(f^{-1}\sO_\sS).
+  \]
+  One may also show that the local triviality of $f$ implies that we have a projection formula, giving that the right-hand side above is canonically isomorphic to $\sO_\sS \otimes_{\u\lC} \rR^*f_*\u\lC$. We established in \cref{gm--local--relative-complex} that $\rR^*f_*\u\lC$ is a local system of $\lC$-vector spaces. The Riemann-Hilbert correspondence \cref{gm--local--riemann-hilbert} then implies the following, answering our question \cref{gm--local--derham-complex}.
+\end{nothing}
+
+\begin{proposition}
+  \label{gm--local--gm-existence}
+  The relative de Rham cohomology sheaves $\rH_\dR^*(\sX/\sS)$ are vector bundles on $\sS$ equipped with a unique flat connection $\nabla$ such that $\ker \nabla$ recovers the relative complex cohomology sheaves $\rR^*f_*\u\lC$.
+\end{proposition}
+
+\begin{definition}
+  \label{gm--local--gm-name}
+  The unique flat connection $\nabla$ on relative de Rham cohomology established by \cref{gm--local--gm-existence} is called the \emph{Gauss-Manin connection}.
+\end{definition}
+
+While we have no chance at seeing the local system $\rR^*f_*\u\lC$ directly in the algebraic world (constant sheaves still don't have interesting cohomology in the Zariski topology), we'll see next that the flat connection translates faithfully.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The algebraic construction}
+\label{gm--construction}
+
+We finish by giving a purely algebraic construction of the Gauss-Manin connection. Let's first note that the algebraic definition of (flat) connection may be copied verbatim from our definition on manifolds \cref{gm--local--connection}.
+
+\begin{definition}
+  \label{gm--construction--connection}
+  Let $f \c X \to S$ be a map of schemes and $\sF$ a quasi-coherent sheaf on $X$. A \emph{connection relative to $S$} on $\sF$ is a map of sheaves of abelian groups
+  \[
+    \nabla \c \sF \to \Omega_{X/S}^1 \otimes_{\sO_X} \sF
+  \]
+  satisfying the Leibniz rule. Such a connection extends uniquely to maps
+  \[
+    \nabla^p \c \Omega_{X/S}^p \otimes_{\sO_X} \sF \to \Omega_{X/S}^{p+1} \otimes_{\sO_X} \sF 
+  \]
+  for $p \ge 0$ satisfying the Leibniz rule. These maps define a cochain-complex if and only if $\nabla^1 \circ \nabla^0 = 0$, in which case we say the connection $\nabla$ is \emph{flat}.
+\end{definition}
+
+\begin{construction}
+  \label{gm--construction--main}
+  Let $S$ be a scheme and suppose given a smooth map $f \c Y \to X$ of smooth $S$-schemes. We will construct a flat connection relative to $S$ on the relative de Rham cohomology sheaves $\rH^*_\dR(Y/X)$.
+
+  Since $f$ is smooth and $Y,X$ are smooth over $S$, we have an exact sequence
+  \[
+     0 \to f^*\Omega^1_{X/S} \to \Omega^1_{Y/S} \to \Omega^1_{Y/X} \to 0
+  \]
+  of locally free sheaves on $Y$. Taking exterior powers, it follows that we have a finite decreasing filtration $G$ on $\Omega^\bullet_{Y/S}$ with associated graded given by
+  \[
+    \Gr^p_G\Omega^\bullet_{Y/S} \iso f^*\Omega^p_{X/S} \otimes_{\sO_Y} \Omega^{\bullet - p}_{Y/X},
+  \]
+  and which is multiplicative in the sense that $G^p \wedge G^{p'} \subseteq G^{p+p'}$. Associated to this filtration is a spectral sequence for computing $\rR^*f_*\Omega^\bullet_{Y/S}$, the first page given by
+  \[
+    E_1^{p,q} = \rR^{p+q}f_*(\Gr^p_G\Omega^\bullet_{Y/S}) \iso \Omega^p_{X/S} \otimes_{\sO_X} \rR^{p+q}f_*(\Omega^{\bullet - p}_{Y/X}) \iso \Omega^p_{X/S} \otimes_{\sO_X} \rH^q_\dR(Y/X),
+  \]
+  where the first isomorphism is the projection formula, which holds since $\Omega_{X/S}^p$ is locally free. The differentials on the first page are thus maps
+  \[
+    d_1^{p,q} \c \Omega^p_{X/S} \otimes_{\sO_X} \rH^q_\dR(Y/X) \to \Omega^{p+1}_{X/S} \otimes_{\sO_X} \rH^q_\dR(Y/X).
+  \]
+  One can show that for $q = 0$ we have $d_1^{p,0} = d \otimes \id_{\rH^0_\dR(Y/X)}$, and since the filtration was multiplicative so is the spectral sequence, so we deduce that in general
+  \[
+    d_1^{p,q}(\omega \otimes s) = d\omega \otimes s + (-1)^p \omega \wedge d_1^{0,q}(s)
+  \]
+  for $\omega$ a local section of $\Omega_{X/S}^p$ and $s$ a local section of $\rH^q_\dR(Y/X)$. It follows immdeiately that $\nabla \ce d_1^{0,q}$ is a flat connection on $\rH^q_\dR(Y/X)$, as desired.
+\end{construction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

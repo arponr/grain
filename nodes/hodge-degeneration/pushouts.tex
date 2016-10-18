@@ -1,0 +1,236 @@
+\section{Pushouts of schemes}
+\label{vhs--pushouts}
+
+We now make a brief detour to discuss the existence and properties of certain pushouts in the category of schemes, which we will employ in the following subsection, in our purely algebraic argument for relative Hodge--de Rham degeneration. 
+
+\begin{proposition}
+  \label{vhs--pushouts--construction}
+  Suppose given closed embeddings of schemes $i_1 \c X_0 \inj X_1$ and $i_2 \c X_1 \inj X_2$. Then there exists a pushout diagram,
+  \[
+    \begin{tikzcd}
+      X_0 \ar[r, "i_1"] \ar[d, "i_2", swap] &
+      X_1 \ar[d, "j_1"] \\
+      X_2 \ar[r, "j_2"] &
+      X.
+    \end{tikzcd}
+  \]
+  in $\Sch$. The pushout scheme $X$, also denoted $X_1 \amalg_{X_0} X_2$, may be constructed as follows:
+  \begin{itemize}
+  \item Its underlying topological space is the pushout, in the category of topological spaces, of the topological spaces underlying $X_1$ and $X_2$ along the maps $i_1$ and $i_2$. This automatically defines the maps $j_1$ and $j_2$ at the level of topological spaces.
+  \item Its structure sheaf is then defined as the fiber product $(j_1)_*\sO_{X_1} \times_{(j_0)_*\sO_{X_0}} (j_2)_*\sO_{X_2}$, where $j_0 \c X_0 \to X_1 \amalg_{X_0} X_2$ is the composite $j_1 \circ i_1 = j_2 \circ i_2$.
+  \end{itemize}
+  Moreover, if $X_0,X_1,X_2$ are all affine, so is $X$.
+\end{proposition}
+
+\begin{proof}
+  Omitted, cf. Scwhede.
+\end{proof}
+
+As in the setting of topological spaces, the pushout $X_1 \amalg_{X_0} X_2$ is thought of as a gluing of $X_1$ and $X_2$ along the copies of $X_0$ lying in each. In particular, we might expect that giving data over $X_1 \amalg_{X_0} X_2$ (e.g. a quasi-coherent sheaf) is equivalent to giving data over $X_1$ and over $X_2$ together with an identification of the two restrictions of these data to $X_0$. The remainder of the subsection is devoted to proving precise statements in this vein. Our exposition here draws from Lurie.
+
+To formulate claims about ``data over $X_1$ and $X_2$ identified over $X_0$'' we will use the notion of pullbacks of categories. This is an example of a (homotopy) pullback in the $2$-category of categories, but let us recall how it looks explicitly.
+
+\begin{convention}
+  \label{vhs--pushouts--category-diagram}
+  Below, we will be considering square diagrams of categories and functors between them. When we say such diagrams are \emph{commutative}, we mean that they commute up to natural isomorphism, though we will leave this implicit in the notation. That is, to give a commutative diagram of categories
+  \[
+    \begin{tikzcd}
+      C_0  &
+      C_1 \ar[l, "f_1", swap] \\
+      C_2 \ar[u, "f_2"] &
+      C \ar[l, "g_2", swap] \ar[u, "g_1", swap]
+    \end{tikzcd}
+  \]
+  means to give the identified categories and functors together with a natural isomorphism $\gamma \c f_1 \circ g_1 \isoto f_1 \circ g_2$, but we will abusively leave $\gamma$ implicit.
+\end{convention}
+
+\begin{construction}
+  \label{vhs--pushouts--category-pullback}
+  Suppose given functors $f_1 \c C_1 \to C_0$ and $f_2 \c C_2 \to C_0$. We construct the pullback category $C_1 \times_{C_0} C_2$ (where the notation abusively omits the functors $f_1$ and $f_2$ as usual) as follows:
+  \begin{itemize}
+  \item An object of $C_1 \times_{C_0} C_2$ is a triple $(c_1,c_2,\alpha)$, where $c_1$ is an object of $C_1$, $c_2$ is an object of $C_2$, and $\alpha$ is an isomorphism $f_1(c_1) \isoto f_2(c_2)$ in $C_0$.
+  \item A morphism $\phi \c (c_1,c_2,\alpha) \to (c'_1, c'_2, \alpha')$ in $C_1 \times_{C_0} C_2$ is a pair $(\phi_1,\phi_2)$, where $\phi_\mu$ is a morphism $c_\mu \to c'_\mu$ in $C_\mu$ for $\mu \in \{1,2\}$, such that the square
+    \[
+      \begin{tikzcd}
+        f_1(c_1) \ar[r, "\alpha"] \ar[d, "f_1(\phi_1)", swap] &
+        f_2(c_2) \ar[d, "f_2(\phi_2)"] \\
+        f_1(c'_1) \ar[r, "\alpha'"] &
+        f_2(c'_2)
+      \end{tikzcd}
+    \]
+    in $C_0$ commutes.
+  \end{itemize}
+
+  Observe that giving a commutative diagram of categories
+  \[
+    \begin{tikzcd}
+      C_0  &
+      C_1 \ar[l, "f_1", swap] \\
+      C_2 \ar[u, "f_2"] &
+      C \ar[l, "g_2", swap] \ar[u, "g_1", swap]
+    \end{tikzcd}
+  \]
+  is equivalent to giving a functor $F \c C \to C_1 \times_{C_0} C_2$. We say such a diagram is a \emph{pullback diagram} when the induced functor $F$ is an equivalence of categories.
+\end{construction}
+
+\begin{lemma}
+  \label{vhs--pushouts--category-pullback-adjunction}
+  Suppose given a commutative diagram of categories
+  \[
+    \begin{tikzcd}
+      C_0  &
+      C_1 \ar[l, "f_1", swap] \\
+      C_2 \ar[u, "f_2"] &
+      C \ar[l, "g_2", swap] \ar[u, "g_1", swap],
+    \end{tikzcd}
+  \]
+  and let $F \c C \to C_1 \times_{C_0} C_2$ denote the induced functor \cref{vhs--pushouts--category-pullback}. Suppose the functors $f_1,f_2,g_1,g_2$ all admit right adjoints, $u_1,u_2,v_1,v_2$ respectively:
+  \[
+    \begin{tikzcd}
+      C_0 \ar[r, "u_1"] \ar[d, "u_2", swap] &
+      C_1 \ar[d, "v_1"] \\
+      C_2 \ar[r, "v_2"] &
+      C
+    \end{tikzcd}
+  \]
+  Let $v_0 \c C_0 \to C$ be the composite $v_1 \circ u_1 \iso v_2 \circ u_2$. Then, assuming $C$ has enough pullbacks, these adjoints induce a functor $U \c C_1 \times_{C_0} C_2 \to C$, given by sending
+  \[
+    (c_1,c_2,\alpha) \mapsto v_1(c_1) \times_{v_0(c_0)} v_2(c_2),
+    \quad\text{where}\ 
+    c_0 \ce f_1(c_1) \lbliso{\alpha} f_2(c_2).
+  \]
+  Moreover, $U$ is right adjoint to $F$.
+\end{lemma}
+
+\begin{situation}
+  \label{vhs--pushouts--sit}
+  For the remainder of this subsection we suppose given a pushout diagram
+    \[
+    \begin{tikzcd}
+      X_0 \ar[r, "i_1"] \ar[d, "i_2", swap] &
+      X_1 \ar[d, "j_1"] \\
+      X_2 \ar[r, "j_2"] &
+      X
+    \end{tikzcd}
+  \]
+  in $\Sch$ with $i_1$ and $i_2$ closed embeddings. We let $j_0 \c X_0 \to X$ be the composite $j_1 \circ i_1 = j_2 \circ i_2$.
+\end{situation}
+
+\begin{proposition}
+  \label{vhs--pushouts--qcoh-clutching}
+  The diagram
+  \[
+    \begin{tikzcd}
+      \QCoh(X_0)  &
+      \QCoh(X_1) \ar[l, "i_1^*", swap] \\
+      \QCoh(X_2) \ar[u, "i_2^*"] &
+      \QCoh(X) \ar[l, "j_2^*", swap] \ar[u, "j_1^*", swap]
+    \end{tikzcd}
+  \]
+  is a pullback diagram of categories. That is, the adjunction
+  \[
+    F \c \QCoh(X) \fromto \QCoh(X_1) \times_{\QCoh(X_0)} \QCoh(X_2) \lc U
+  \]
+  determined by \cref{vhs--pushouts--category-pullback-adjunction} from pullback and pushforward in $i_1,i_2,j_1,j_2$ in fact gives an equivalence of categories.
+
+  Informally, the above says that giving a quasi-coherent sheaf $\sF$ on the pushout $X$ is equivalent to giving quasi-coherent sheaves $\sF_1 \iso j_1^*\sF$ on $X_1$ and $\sF_2 \iso j_2^*\sF$ on $X_2$ together with an identification $i_1^* \sF_1 \iso \sF_0 \iso  i_2^*\sF_2$ of quasi-coherent sheaves on $X_0$. More specifically, we may recover $\sF$ as $(j_1)_*\sF_1 \times_{(j_0)_*\sF_0} (j_2)_*\sF_2$.
+\end{proposition}
+
+\begin{notation}
+  \label{vhs--pushouts--scheme-pullback}
+  Let $X$ be a scheme. We denote by $\Sch_{/X}$ the overcategory in $\Sch$ of $X$-schemes. Given a map of schemes $f \c X \to Y$ we have an adjunction
+  \[
+    f_* \c \Sch_{/X} \fromto \Sch_{/Y} \lc f^*,
+  \]
+  where the left adjoint $f_*$ is the pushforward functor given by composition with $f$ and the right adjoint $f^*$ is the pullback functor sending a $Y$-scheme $Y'$ to the $X$-scheme $Y' \times_Y X$.\footnote{Note that the handedness of the adjunction is opposite to the situation of pushforward and pullback of sheaves; indeed, one should expect such a flip when moving between ``spaces'' and ``functions''.}
+\end{notation}
+
+\begin{proposition}
+  \label{vhs--pushouts--scheme-clutching}
+  The diagram
+  \[
+    \begin{tikzcd}
+      \Sch_{/X_0}  &
+      \Sch_{/X_1} \ar[l, "i_1^*", swap] \\
+      \Sch_{/X_2} \ar[u, "i_2^*"] &
+      \Sch_{/X} \ar[l, "j_2^*", swap] \ar[u, "j_1^*", swap]
+    \end{tikzcd}
+  \]
+  is a pullback diagram of categories. That is, the adjunction
+  \[
+    F \c \Sch_{/X_1} \times_{\Sch_{/X_0}} \Sch_{/X_2} \fromto \Sch_{/X} \lc U
+  \]
+  determined by (the dual of) \cref{vhs--pushouts--category-pullback-adjunction} from pullback and pushforward in $i_1,i_2,j_1,j_2$ in fact gives an equivalence of categories.
+
+  Informally, the above says that giving an scheme $Y$ over the pushout $X$ is equivalent to an $X_1$-scheme $Y_1 \iso j_1^*Y$ and an $X_2$ scheme $Y_2 \iso j_2^*Y$ together with an identification $i_1^*Y_1 \iso Y_0 \iso i_2^*Y_2$ of $X_0$-schemes. More specifically, we may recover $Y$ as $Y_1 \amalg_{Y_0} Y_2$.
+\end{proposition}
+
+\begin{notation}
+  \label{vhs--pushouts--open-restriction}
+  If $U$ is an open set of $X$, we set
+  \[
+    U_0 \ce j_0^{-1}(U),
+    \quad
+    U_1 \ce j_1^{-1}(U),
+    \quad\text{and}\quad
+    U_2 \ce j_2^{-1}(U).
+  \]
+  If $\kU = \{U_\lambda\}_{\lambda \in \Lambda}$ is an open cover of $X$, for $\mu \i \{0,1,2\}$ we denote the open cover $\{U_{\lambda,\mu}\}_{\lambda \in \Lambda}$ of $X_\mu$ by $\kU_\mu$.
+\end{notation}
+
+\begin{remark}
+  \label{vhs--pushouts--open-cover}
+  It follows from the construction of pushouts \cref{vhs--pushouts--construction} that we may choose an open affine cover $\kU = \{U_\lambda\}_{\lambda \in \Lambda}$ of $X$ such that for each $\lambda \in \Lambda$ we have
+  \[
+    U_\lambda \iso U_{\lambda,1} \amalg_{U_{\lambda,0}} U_{\lambda,2}.
+  \]
+\end{remark}
+
+\begin{lemma}
+  \label{vhs--pushouts--cech-complex}
+  Let $\sF$ be a quasi-coherent sheaf on $X$. For $\mu \in \{0,1,2\}$, set $\sF_\mu \ce j_\mu^*\sF$. Let $\kU$ be an open affine cover of $X$ as in \cref{vhs--pushouts--open-cover}. Let $\sC^\bullet(\kU,\sF)$, $\sC^\bullet(\kU_\mu,\sF_\mu)$ denote the associated sheafified \v{C}ech resolution complexes. Then we have
+  \[
+    \sC^\bullet(\kU,\sF) \iso (j_1)_*\sC^\bullet(\kU_1,\sF_1) \times_{(j_0)_*\sC^\bullet(\kU_0,\sF_0)} (j_2)_*\sC^\bullet(\kU_2,\sF_2).
+  \]
+\end{lemma}
+
+\begin{proof}
+  Recall the definition of the sheaves in the \v{C}ech resolution:
+  \[
+    \sC^p(\kU,\sF) \ce \prod_{\u\lambda = \{\lambda_0 < \cdots < \lambda_p\}} (f_{U_{\u\lambda}})_*\sF|_{U_{\u\lambda}},
+  \]
+  where we have a fixed an arbitary well-ordering on our index set $\Lambda$, set $U_{\lambda_0,\ldots,\lambda_p} \ce U_{\lambda_0} \cap \cdots \cap U_{\lambda_p}$, and denoted by $f_{U_{\u\lambda}$ the inclusion ${U_{\u\lambda}} \inj X$. For $\mu \in \{0,1,2\}$, let
+  \[
+    U_{\u\lambda,\mu} \ce j_\mu^{-1}(U_{\u\lambda}) = U_{\lambda_0,\mu} \cap \cdots \cap U_{\lambda_p,\mu}
+  \]
+  and observe that $U_{\u\lambda} \iso U_{\u\lambda,1} \amalg_{U_{\u\lambda,0}} U_{\u\lambda,2}$. It then follows from \cref{vhs--pushouts--qcoh-clutching} that
+  \begin{equation}
+    \label{vhs--pushouts--cech-complex--sheaf-intersection}
+    \sF|_{U_{\u\lambda}} \iso (j_{\u\lambda,1})_*\sF_1|_{U_{\u\lambda,1}} \times_{(j_{\u\lambda,0})_*\sF_0|_{U_{\u\lambda,0}}} (j_{\u\lambda,2})_*\sF_2|_{U_{\u\lambda,2}},
+  \end{equation}
+  where $\sF_0 \ce j_0^*\sF$ and $j_{\u\lambda,\mu}$ denotes the inclusion $U_{\u\lambda,\mu} \inj U_{\u\lambda}$. Now let $f_{U_{\u\lambda,\mu}}$ denote the inclusion $U_{\u\lambda,\mu} \inj X_\mu$. Since $f_{U_\lambda} \circ j_{\u\lambda,\mu} = j_\mu \circ f_{U_{\u\lambda,\mu}}$ and pushforward of sheaves, a right adjoint, commutes with limits, we get from \cref{vhs--pushouts--cech-complex--sheaf-intersection} that
+  \[
+    (f_{U_{\u\lambda}})_* \sF|_{U_{\u\lambda}} \iso (j_1)_*(f_{U_{\u\lambda,1}})_*\sF_1|_{U_{\u\lambda,1}} \times_{(j_0)_*(f_{U_{\u\lambda,0}})_*\sF_0|_{U_{\u\lambda,0}}} (j_2)_*(f_{U_{\u\lambda,2}})_*\sF_2|_{U_{\u\lambda,2}},
+  \]
+  Then using that products and pullbacks of sheaves commute (limits commute with limits), we deduce finally that
+  \[
+    \sC^p(\kU,\sF) \iso (j_1)_*\sC^p(\kU_1,\sF_1) \times_{(j_0)_*\sC^p(\kU_0,\sF_0)} (j_2)_*\sC^p(\kU_2,\sF_2).
+  \]
+  Again applying \cref{vhs--pushouts--qcoh-clutching}, this proves the claim.
+\end{proof}
+
+\begin{proposition}
+  \label{vhs--pushouts--cohomology}
+  Let $f \c Y \to X$ be a quasi-compact, separated map of schemes. Let $\sF$ be a quasi-coherent sheaf on $Y$. For $\mu \in \{0,1,2\}$, let $Y_\mu \ce Y \times_X X_{\mu}$, let $f_\mu \c Y_\mu \to X_\mu$ and $l_\mu \c Y_\mu \to Y$ be the induced maps, and let $\sF_\mu \ce l_\mu^*\sF$. Then
+  \[
+    j_\mu^*(\rR^qf_*\sF) \iso \rR^q(f_\mu)_*\sF_\mu.
+  \]
+\end{proposition}
+
+\begin{proof}
+  Note that $Y \iso Y_1 \amalg_{Y_0} Y_2$ by \cref{vhs--pushouts--scheme-clutching}. So fix an open affine cover $\kU$ of $Y$ as in \cref{vhs--pushouts--open-cover}, and let $\sC^\bullet(\kU,\sF)$, $\sC^\bullet(\kU_\mu,\sF_\mu)$ denote the associated sheafified \v{C}ech resolution complexes. Since $f$ is quasi-compact and separated, so is $f_\mu$, and hence we may compute $\rR^qf_*\sF$ and $\rR^q(f_\mu)_*\sF_\mu$ via \v{C}ech cohomology:
+  \[
+    \rR^qf_*\sF \iso \rH^q(f_*\sC^\bullet(\kU,\sF)), \quad
+    \rR^q(f_\mu)_*\sF_\mu \iso \rH^q((f_\mu)_*\sC^\bullet(\kU_\mu,\sF_\mu)).
+  \]
+\end{proof}

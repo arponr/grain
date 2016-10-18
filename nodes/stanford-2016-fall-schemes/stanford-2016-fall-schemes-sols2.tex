@@ -1,0 +1,91 @@
+\input{preamble}
+
+\title{Math 216A Homework 2}
+\author{Arpon Raksit}
+\date{7 October 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Hartshorne exercise  II.2.22}
+
+Let $X$ be a topological space and $\{U_i\}$ an open cover of $X$. Let $U_{i,j} \ce U_i \cap U_j$ (considering $(i,j)$ as an \emph{ordered} pair). Let
+\[
+  f_i \c U_i \inj X, \quad
+  f_{i,j} \c U_{i,j} \inj X, \quad
+  f^i_{i,j} \c U_{i,j} \inj U_i, \quad
+  f^j_{i,j} \c U_{i,j} \inj U_i
+\]
+denote the inclusions.
+
+\begin{lemma}
+  \label{sheaf-recovering}
+  Let $\sF$ be a sheaf on $X$. Let $\sF_i \ce (f_i)^*\sF$ and $\sF_{i,j} \ce (f_{i,j})^*\sF = (f^i_{i,j})^*\sF_i = (f^j_{i,j})^*\sF_j$. Then we have a canonical equalizer sequence of sheaves
+  \[
+    \sF \to \prod_i (f_i)_*\sF_i \doubto \prod_{i,j} (f_{i,j})_*\sF_{i,j},
+  \]
+  where here:
+  \begin{itemize}
+  \item the left map is given on the $i$-th factor of the target by the unit map $\sF \to (f_i)_*\sF_i = (f_i)_*(f_i)^*\sF$ of the adjunction $(f_i)^* \dashv (f_i)_*$;
+  \item the upper right map is given on the $(i,j)$-th factor of the target by projection onto the $i$-th factor of the source followed by $(f_i)_*$ applied to the unit map $\sF_i \to (f^i_{i,j})_*\sF_{i,j} = (f^i_{i,j})_*(f^i_{i,j})^*\sF_i$ of the adjunction $(f^i_{i,j})^* \dashv (f^i_{i,j})_*$;
+  \item the lower right map is given on the $(i,j)$-th factor of the target by projection onto the $j$-th factor of the source followed by $(f_j)_*$ applied to the unit map $\sF_j \to (f^j_{i,j})_*\sF_{i,j} = (f^j_{i,j})_*(f^j_{i,j})^*\sF_i$ of the adjunction $(f^j_{i,j})^* \dashv (f^j_{i,j})_*$.
+  \end{itemize}
+\end{lemma}
+
+\begin{proof}
+  Limits of sheaves are computed as limits of presheaves, so it suffices to check that the above gives an equalizer sequence after evaluating on any open set $V \subseteq X$. Well, this is precisely the sequence
+  \[
+    \sF(V) \to \prod_i \sF(V \cap U_i) \doubto \prod_{i,j} \sF(V \cap U_i \cap U_j)
+  \]
+  that the sheaf condition (applied to the cover ${V \cap U_i}$ of $V$) tells us is an equalizer.
+\end{proof}
+
+\begin{proposition}
+  \label{sheaf-gluing}
+  Suppose given for each $i$ a sheaf $\sF_i$ on $U_i$, and for each $(i,j)$ an isomorphism $\phi_{i,j} \c (f^i_{i,j})^*\sF_i \isoto (f^j_{i,j})^*\sF_j$, such that $\phi_{i,i}$ is the identity for each $i$ and for any $(i,j,k)$ we have $\phi_{i,k} = \phi_{j,k} \circ \phi_{i,j}$ when restricted to $U_{i,j,k} \ce U_i \cap U_j \cap U_k$. Then there exists a unique (up to unique isomorphism) sheaf $\sF$ on $X$ equipped with isomorphisms $\psi_i \c (f_i)^*\sF \isoto \sF_i$ such that $\phi_{i,j} = \psi_j \circ \psi_i^{-1}$ (restricted to $U_{i,j})$.
+\end{proposition}
+
+\begin{proof}
+  Inspired by \cref{sheaf-recovering}, we will consider two maps
+  \[
+    \prod_i (f_i)_*\sF_i \doubto \prod_{i,j} (f_{i,j})_*\sF_{i,j},
+  \]
+  defined as follows:
+  \begin{itemize}
+  \item the upper map is just as in \cref{sheaf-recovering}, given on the $(i,j)$-th factor of the target by projection onto the $i$-th factor of the source followed by $(f_i)_*$ applied to the unit map $\sF_i \to (f^i_{i,j})_*\sF_{i,j} = (f^i_{i,j})_*(f^i_{i,j})^*\sF_i$ of the adjunction $(f^i_{i,j})^* \dashv (f^i_{i,j})_*$;
+  \item the lower map is less tautological, given on the $(i,j)$-th factor of the target by projection onto the $j$-th factor of the source followed by $(f_j)_*$ applied to the map $\sF_j \to (f^j_{i,j})_*\sF_{i,j} = (f^j_{i,j})_*(f^j_{i,j})^*\sF_i$ which is adjoint to $\phi_{j,i}$ in the adjunction $(f^j_{i,j})^* \dashv (f^j_{i,j})_*$.
+  \end{itemize}
+  To prove existence, we will show that the equalizer of these maps supplies us with the desired $\sF$ and $\psi_i$. To prove uniqueness, we will show that any such $\sF$ and $\psi_i$ supply us with an equalizer of these two maps\footnote{This also provides a universal property for mapping into the glued sheaf.}.
+
+  Let's begin with existence. So let $\sF$ be the equalizer of the above two maps. This gives us a canonical map $\alpha \c \sF \to \prod_i (f_i)_*\sF_i$, and we define $\psi_i \c (f_i)^*\sF \to \sF_i$ to be adjoint to the map $\alpha_i \c \sF \to (f_i)_*\sF_i$ in the $i$-th factor. That $\alpha$ equalizes the two maps above tells us precisely that for each $(i,j)$ we have $\psi_j = \phi_{i,j} \circ \psi_i$ on $U_{i,j}$. Thus we need only show for each $i$ that $\psi_i$ is an isomorphism.
+
+  Since $f_i$ is an open inclusion, it's clear that $(f_i)^*$ preserves limits (including products and equalizers), and hence we may pull back our equalizer sequence to $U_i$:
+  \[
+    (f_i)^*\sF \to \prod_j (f_i)^*(f_j)_*\sF_j \doubto \prod_{j,k} (f_i)^*(f_{j,k})_*\sF_{j,k}.
+  \]
+  Then since $(f_i)^*(f_j)_* = (f^i_{i,j})_*(f_i)^*$ and similarly for $(f_i)^*(f_{j,k})_*$, we may reduce to the case that $U_i = X$ (and $f_i = \id_X$), and $\psi_i = \alpha_i$ is just a map $\sF \to \sF_i$.
+
+  We define an inverse map $\beta_i \c \sF_i \to \sF$. By definition of equalizer, this means we must define a map $\beta'_i \c \sF_i \to \prod_j (f_j)_*\sF_j$ which equalizes the two maps to $\prod_{j,k} (f_{j,k})_*\sF_{j,k}$. We achieve this by defining the $j$-th factor $\beta'_{i,j}$ of $\beta'_i$ to be the map $\sF_i \to (f_j)_*\sF_j$ adjoint to the isomorphism $\phi_{j,i} \c (f_j)^*\sF_i \isoto \sF_i$; that $\beta'_i$ equalizes the two maps follows from the cocycle condition $\phi_{i,k} = \phi_{j,k} \circ \phi_{i,j}$. That $\alpha_i \circ \beta_i = \id_{\sF_i}$ is immediate from the condition that $\phi_{i,i}$ is the identity. To check $\beta_i \circ \alpha_i = \id_{\sF}$ is equivalent to checking $\alpha_j = \beta'_{i,j} \circ \alpha_i \c \sF \to (f_j)_*\sF_j$. Chasing through the definitions (note $\beta'_{i,j}$ is defined identically to the $(i,j)$-th factor of the lower map of the equalizer), this is immediate from $\alpha$ equalizing the two maps. This finishes the proof that $\alpha_i$ is an isomorphism, and hence finishes the construction.
+
+  We now prove uniqueness. Suppose given a sheaf $\sF$ on $X$ with isomorphisms $\psi_i$ as in the statement of the proposition. Observe that this gives us a commutative diagram (or rather two overlaid commutative diagrams)
+  \[
+    \begin{tikzcd}
+      \prod_i (f_i)_*(f_i)^*\sF \ar[r, shift left=0.5ex] \ar[r, shift right=0.5ex] \ar[d, "((f_i)_*(\psi_i))"] & 
+      \prod_{i,j} (f_{i,j})_*(f_{i,j})^*\sF \ar[d, "((f_i)_*(f^i_{i,j})^*(\psi_i))"] \\
+      \prod_i (f_i)_*\sF_i \ar[r, shift left=0.5ex] \ar[r, shift right=0.5ex] & 
+      \prod_{i,j} (f_{i,j})_*\sF_{i,j},
+    \end{tikzcd}
+  \]
+  where the first row is the pair of maps appearing in \cref{sheaf-recovering} and the second row is the pair we've been considering in this proof. By \cref{sheaf-recovering} $\sF$ is an equalizer of the top row. Since the vertical maps are isomorphisms, it must be an equalizer of the bottom row as well.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

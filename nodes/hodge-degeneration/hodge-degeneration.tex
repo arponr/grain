@@ -1,0 +1,58 @@
+\input{preamble}
+
+\title{$D$-modules, representation theory, Hodge theory}
+\author{Arpon Raksit}
+\date{March 15, 2016}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\an}{\mathrm{an}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\hol}{\mathrm{hol}}
+\newcommand{\QCoh}{\mathrm{QCoh}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\sm}{\mathrm{sm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+% \begin{abstract}
+%   One perspective on classical Hodge theory is that it is the study of the information contained in the complex cohomology of complex varieties. Complex cohomology is perhaps usually thought of as an invariant of the complex-analytic space underlying a variety, but it may be constructed purely algebraically, via algebraic de Rham cohomology. In this essay we discuss aspects of Hodge theory that are visible from this purely algebraic point of view, namely the degeneration of the Hodge--de Rham spectral sequence (by an argument of Deligne-Illusie) and the Gauss-Manin connection (which we also examine from the perspective of crystals).
+% \end{abstract}
+
+% \tableofcontents
+% \newpage
+
+% \input{ack}
+\newpage
+
+\numberwithin{block}{subsection}
+\cspreto{section}{\setcounter{block}{0}}
+\addtocounter{section}{-1}
+
+\input{intro}
+\newpage
+
+\input{degen}
+\newpage
+
+\input{gm}
+\newpage
+
+% \begin{appendices}
+%   \numberwithin{block}{section}
+%   \input{pushouts}
+% \end{appendices}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{*} 
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}

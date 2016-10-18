@@ -1,0 +1,257 @@
+\section{Introduction}
+\label{intro}
+
+Let's say we're interested in studying algebraic varieties $X$ over a field $K$. In the classical case where $K = \lC$, we are abetted by the fact that, in addition to the Zariski topology on $X$, we have a natural analytic topology on the set of complex points $X(\lC)$. More precisely, the set $X(\lC)$ carries the structure of a complex-analytic space (a complex manifold when $X$ is smooth), referred to as the \emph{analytification} of $X$ and denoted $X^\an$. While the Zariski topology is certainly very useful, the analytic topology is much closer to our intuitive notion of what a complex variety looks like, so we might seek to gain information about $X$ by studying $X^\an$ topologically.
+
+There's a natural tool we might employ in approaching the latter task: complex cohomology. There are several perspectives on this tool, but let us take as our starting point the sheaf-theoretic formulation.
+
+\begin{definition}
+  \label{intro--complex-cohom}
+  We define the \emph{complex cohomology} of a topological space $U$ as the sheaf cohomology $\rH^*(U;\u\lC)$, where $\u\lC$ denotes the constant sheaf on $U$ with value $\lC$.
+\end{definition}
+
+So we are looking at $\rH^*(X^\an,\u\lC)$ as an invariant of $X^\an$, and hence of $X$. To justify our statement above abut the advantage of the analytic topology, let us note that this is completely different from considering $\rH^*(X;\u\lC)$, the complex cohomology of $X$ equipped with its Zariski topology, which is of much less interest. Indeed, if $X$ is an irreducible variety, then the constant sheaf $\u\lC$ on it is flasque, hence acyclic. For example, suppose $X$ is complex projective space $\lP^n_\lC$; then $X$ is irreducible as a variety, so $\rH^r(X;\u\lC) \iso 0$ for $r > 0$, while $X^\an$, complex projective space as a complex manifold, has nontrivial complex cohomology.
+
+But what if we are interested in working over some other field $K$? Is there some way we can still employ such cohomological invariants? We are brought to the following motivating question.
+
+\begin{question}
+  \label{intro--q-alg}
+  Can the invariant $\rH^*(X^\an;\u\lC)$ of $X$ be constructed and studied purely algebraically (i.e. intrinsically to $X$, without resorting to the analytic object\footnote{The diction here is ironic: this essay is written by an author and aimed at a reader who would only under significant duress resort in the lands of analysis. It is left to the reader to decide whether this is a warning against or an encouragement towards continuing.} $X^\an$)?
+\end{question}
+
+There's another concern we might have even when working over $\lC$. A priori, the invariant $\rH^*(X^\an;\lC)$ is sensitive only to the homotopy type of $X^\an$. This is somewhat unsatisfactory from the point of view of geometry. For example, for any elliptic curve $X$, $X^\an$ is homeomorphic to a torus. Thus, a priori, complex cohomology cannot distinguish between non-isomorphic elliptic curves. This motivates a second question.
+
+\begin{question}
+  \label{intro--q-struct}
+  Is there extra structure carried by $\rH^*(X^\an;\u\lC)$ that is sensitive to the holomorphic structure of $X^\an$ and the algebraic structure of $X$?
+\end{question}
+
+The above two questions can be addressed using the de Rham perspective on cohomology, which is the main subject of this essay.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Hodge theory}
+\label{intro--hodge}
+
+Let us first addess \cref{intro--q-struct}. We begin by recalling how to bridge the sheaf-theoretic definition of complex cohomology above with the de Rham perspective. This centers around ``resolving'' the sheaf $\u\lC$ by sheaves of differential forms. However, there are variations on this theme, resulting in different formulations of de Rham cohomology. It is instructive to begin by considering the usual formulation from differential topology, even though it won't be of further interest to us here.
+
+\begin{situation}
+  \label{intro--hodge--hyp}
+  In this subsection, let $\sX$ be a complex manifold of complex dimension $n$ (so of dimension $2n$ as a smooth manifold), perhaps imagining $\sX = X^\an$ for $X$ a smooth variety of dimension $n$ over $\lC$.
+\end{situation}
+
+\begin{definition}
+  \label{intro--hodge--smooth-derham}
+  Let $\Omega_{\sX,\sm}^\bullet$ denote the cochain-complex of sheaves of smooth complex differential forms on $\sX$. Define the (complex) \emph{smooth de Rham cohomology} of $\sX$ as
+  \[
+    \rH^*_{\dR,\sm}(\sX) \ce
+    \rH^*(\sX;\Omega_{\sX,\sm}^\bullet),
+  \]
+  the sheaf cohomology\footnote{When evaluated on cochain-complexes of sheaves, sheaf cohomology is sometimes referred to as \emph{hypercohomology}. I don't care for this terminology.} of this cochain-complex.
+\end{definition}
+
+This definition may initially come across as opaque or abstruse, but it is the one that we will be able to immediately emulate in the variations that follow. In any case, let us quickly show that it computes complex cohomology and is equivalent to the more standard definition.
+
+\begin{nothing}
+  \label{intro--hodge--smooth-derham-iso}
+  The classical Poincar\'e lemma for smooth forms implies that the sequence of sheaves
+  \[
+    0 \to \u\lC \to \Omega^0_{\sX,\sm} \lblto{d}
+    \Omega^1_{\sX,\sm} \lblto{d} \cdots \lblto{d}
+    \Omega^{2n}_{\sX,\sm} \to 0
+  \]
+  is exact. In other words, viewing the sheaf $\u\lC$ as a cochain-complex concentrated in degree $0$, we have a canonical quasi-isomorphism
+  $\u\lC \isoto \Omega_{\sX,\sm}^\bullet$, begetting a canonical isomorphism
+  \[
+    \rH^*(\sX,\u\lC) \isoto \rH^*_{\dR,\sm}(\sX)
+  \]
+  between complex cohomology and smooth de Rham cohomology.
+\end{nothing}
+
+\begin{nothing}
+  \label{intro--hodge--smooth-derham-global}
+  The sheaves $\Omega_{\sX,\sm}^i$ are acyclic---i.e. $\rH^j(\sX;\Omega_{\sX,\sm}^i) \iso 0$ for $j > 0$---due to the existence of smooth partitions of unity. Hence the sheaf cohomology of $\Omega_{\sX,\sm}^\bullet$ may be computed as the cohomology of its cochain-complex of global sections, i.e.
+  \[
+    \rH^*_{\dR,\sm}(\sX) \iso
+    \rH^*(\Gamma(\sX,\Omega_{\sX,\sm}^\bullet)).
+  \]
+\end{nothing}
+
+While this familiar characterization of smooth de Rham cohomology provides a concrete way of understanding cohomology classes, it's not of great help in formulating cohomology algebraically. However, it does give us a template that we can translate into both the holomorphic and algebraic settings, which by GAGA principles we should be able to compare. So let's do that. We first address the holomorphic case.
+
+\begin{definition}
+  \label{intro--hodge--holomorphic-derham}
+  Let $\Omega_{\sX}^\bullet$ denote the cochain-complex of sheaves of holomorphic complex differential forms on $\sX$ and define the \emph{holomorphic de Rham cohomology} of $\sX$ as
+  \[
+    \rH^*_\dR(\sX) \ce
+    \rH^*(\sX;\Omega_{\sX}^\bullet),
+  \]
+  the sheaf cohomology of this cochain-complex.
+\end{definition}
+
+\begin{nothing}
+  \label{intro--hodge--holomorphic-derham-iso}
+  There is a holomorphic analogue of the Poincar\'e lemma, implying that the sequence of sheaves
+  \[
+    0 \to \u\lC \to \Omega^0_{\sX} \lblto{\del}
+    \Omega^1_{\sX} \lblto{\del} \cdots \lblto{\del}
+    \Omega^n_{\sX} \to 0
+  \]
+  is exact. Again, this may be reformulated as a quasi-isomorphism $\u\lC \isoto \Omega_{\sX}^\bullet$, begetting a canonical isomorphism
+  \[
+    \rH^*(\sX,\u\lC) \isoto \rH^*_\dR(\sX)
+  \]
+  between complex cohomology and holomorphic de Rham cohomology.
+\end{nothing}
+
+\begin{nothing}
+  \label{intro--hodge--holomorphic-derham-nonglobal}
+  Unlike the smooth situation \cref{intro--hodge--smooth-derham-global}, the holomorphic sheaves $\Omega^i_{\sX}$ are not in general acyclic (we do not have holomorphic partitions of unity). Thus, holomorphic de Rham cohomology cannot in general be identified as the cohomology of the cochain-complex of global holomorphic differential forms.
+\end{nothing}
+
+\begin{nothing}
+  \label{intro--hodge--holomorphic-hodge-ss}
+  However, there is still a sense in which holomorphic de Rham cohomology is controlled by the individual sheaves $\Omega^i_{\sX}$. Namely, there is a spectral sequence
+  \[
+    E^{i,j}_1 = \rH^j(\sX;\Omega^i_{\sX})
+    \quad \Rightarrow \quad
+    \rH^{i+j}_\dR(\sX),
+  \]
+  which we refer to as the \emph{Hodge--de Rham spectral sequence}.
+
+  This spectral sequence arises from a filtration on the complex of sheaves $\Omega_{\sX}^\bullet$, namely the ``stupid filtration''
+  \[
+    0 = \Omega_{\sX}^{\bullet \ge n+1}
+    \inj \cdots \inj \Omega_{\sX}^{\bullet \ge i} \inj \cdots \inj
+    \Omega_{\sX}^{\bullet \ge 0} = \Omega_{\sX}^\bullet,
+  \]
+  where $\Omega_{\sX}^{\bullet \ge i}$ is the truncation of $\Omega_{\sX}^\bullet$ to a cochain-complex concentrated in degrees $\ge i$. In particular, the spectral sequence converges to the (associated graded of the) filtration
+  \[
+    0 = F^{n+1}\rH_\dR^r(\sX)
+    \inj \cdots \inj F^i\rH_\dR^r(\sX) \inj \cdots \inj
+    F^0\rH_\dR^r(\sX) = \rH_\dR^r(\sX),
+  \]
+  where $F^i\rH_\dR^r(\sX)$ is the image of the map on sheaf cohomology induced by the inclusion $\Omega_{\sX}^{\bullet \ge i} \inj \Omega_{\sX}^\bullet$; we call this filtration on holomorphic de Rham cohomology the \emph{Hodge filtration}.
+\end{nothing}
+
+This is the beginning of our answer to \cref{intro--q-struct}: the complex cohomology of $\sX$ carries the extra structure of this Hodge filtration. Seeking to better understand this structure, we are naturally brought to the following question.
+
+\begin{question}
+  \label{intro--hodge--q-degen}
+  What can we say about the degeneration of the holomorphic Hodge--de Rham spectral sequences \cref{intro--hodge--holomorphic-hodge-ss}?
+\end{question}
+
+This question is answered by the main theorem of Hodge theory, which can be formulated as follows.
+
+\begin{nothing}
+  \label{intro--hodge--conjugation}
+  By functoriality of sheaf cohomology, the complex conjugation automorphism on $\u\lC$ determines a complex conjugation automorphism on complex cohomology $\rH^*(\sX,\u\lC)$, and hence on holomorphic de Rham cohomology $\rH_\dR^*(\sX)$ via the isomorphism \cref{intro--hodge--holomorphic-derham-iso}. One may alternatively think of this conjugation operation as the ``real structure'' arising from  the canonical isomorphism
+  \[
+    \rH^*(\sX,\u\lR) \otimes_\lR \lC \isoto \rH^*(\sX,\u\lC).
+  \]
+\end{nothing}
+
+\begin{notation}
+  \label{intro--hodge--conjugate-filtration}
+  We denote by $\o F$ the filtration on $\rH_\dR^*(\sX)$ conjugate to the Hodge filtration $F$ under the conjugation automorphism defined in \cref{intro--hodge--conjugation}.
+\end{notation}
+ 
+\begin{theorem}
+  \label{intro--hodge--theory}
+  Suppose $\sX$ is compact and K\"ahler (which holds e.g. when $\sX = X^\an$ for $X$ a smooth \emph{projective} complex variety).
+  \begin{enumerate}[leftmargin=*]
+  \item \label{intro--hodge--theory--degen}
+    The holomorphic Hodge--de Rham spectral sequence \cref{intro--hodge--holomorphic-hodge-ss} degenerates immediately at $E_1$. We thus have canonical isomorphisms
+    \[
+      \Gr_F^p\rH_\dR^{p+q}(\sX) \iso \rH^q(\sX;\Omega^p_{\sX}),
+    \]
+    where $\Gr_F^\bullet$ is the associated graded of the Hodge filtration.
+  \item \label{intro--hodge--theory--split}
+    The composite map
+    \[
+      F^i\rH_\dR^{i+j}(\sX) \cap \o F^j\rH_\dR^{i+j}(\sX) \inj F^i\rH_\dR^{i+j}(\sX) \surj \Gr_F^i\rH_\dR^{i+j}(\sX)
+    \]
+    is an isomorphism. We thus have a canonical splitting
+    \[
+      \rH_\dR^k(\sX) \iso \bigoplus_{0 \le i \le k} \Gr_F^i\rH_\dR^k(\sX) \iso \bigoplus_{i+j=k} \rH^j(\sX;\Omega^i_{\sX}),
+    \]
+    in which the subspaces $\rH^j(\sX;\Omega^i_{\sX})$ and $\rH^i(\sX;\Omega^j_{\sX})$ are conjugates of one another.
+  \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+  \label{intro--hodge--constraint}
+  Note that in addition to allowing us to understand the Hodge filtration, \cref{intro--hodge--theory} immediately places some concrete cohomological restrictions on compact K\"ahler manifolds $\sX$. For example, we see that $\rH^j(\sX;\Omega^i_{\sX})$ and $\rH^i(\sX;\Omega^j_{\sX})$ must have the same dimension (as $\lC$-vector spaces), and hence that $\rH^k(\sX;\u\lC) \iso \rH_\dR^k(\sX)$ must have even dimension when $k$ is odd.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Algebraic de Rham cohomology}
+\label{intro--alg}
+
+We now address \cref{intro--q-alg}, by formulating an algebraic analogue of de Rham cohomology.
+
+\begin{situation}
+  \label{intro--alg--hyp}
+  In this subsection we let $K$ be any field and $X$ a $K$-scheme.
+\end{situation}
+
+\begin{notation}
+  \label{intro--kahler-differentials}
+  Let $\Omega_{X/K}$ denote the sheaf of relative K\"ahler differentials for the structure morphism $X \to \Spec K$. Recall that this object plays the role of the cotangent bundle in the algebraic world, in particular coming equipped with a canonical ``differential'' map $d \c \sO_X \to \Omega_{X/K}$.
+\end{notation}
+
+\begin{definition}
+  \label{intro--algebraic-derham}
+   Let $\Omega_{X/K}^i$ be the $i$-th exterior power of $\Omega_{X/K}$ (as an $\sO_X$-module) for $i\ge 0$. The differential $d \c \sO_X \to \Omega_{X,K}$ induces differentials $\Omega_{X/K}^i \to \Omega_{X/K}^{i+1}$, giving rise to a cochain-complex of sheaves $\Omega_{X/K}^\bullet$ called the \emph{de Rham complex} of $X$ over $K$. We think of this as the cochain-complex of ``algebraic differential forms'' on $X$ and define the \emph{algebraic de Rham cohomology} of $X$ as
+  \[
+    \rH^*_\dR(X) \ce \rH^*(X;\Omega_{X/K}^\bullet),
+  \]
+  the sheaf cohomology of this cochain-complex.
+\end{definition}
+
+\begin{nothing}
+  \label{intro--alg--hodge-ss}
+  The construction of the Hodge--de Rham spectral sequence in the holomorphic setting \cref{intro--hodge--holomorphic-hodge-ss} goes through verbatim for algebraic de Rham cohomology, giving an algebraic \emph{Hodge--de Rham spectral sequence}
+  \[
+    E^{i,j}_1 = \rH^j(\sX;\Omega^i_{\sX})
+    \quad \Rightarrow \quad
+    \rH^{i+j}_\dR(\sX)
+  \]
+  convering to an algebraic \emph{Hodge filtration}.
+\end{nothing}
+
+Now, in the case $K = \lC$, Serre's GAGA allows us to compare algebraic and holomorphic de Rham cohomology, giving the following.
+
+\begin{theorem}
+  \label{intro--alg--gaga}
+  Suppose $K = \lC$ and $X$ is proper. There are natural isomorphisms
+  \[
+    \rH^j(X;\Omega_{X/\lC}^i) \iso \rH^j(X^\an;\Omega_{X^\an}^i).
+  \]
+  These extend to a natural isomorphism between the holomorphic and algebraic Hodge--de Rham spectral sequences \cref{intro--hodge--holomorphic-hodge-ss,intro--alg--hodge-ss}. Consequently, there is a natural isomorphism
+  \[
+    \rH_\dR^*(X) \iso \rH_\dR^*(X^\an)
+  \]
+  between the algebraic de Rham cohomology of $X$ and the holomorphic de Rham cohomology of $X^\an$, under which the holomorphic and algebraic Hodge filtrations may be identified.
+\end{theorem}
+
+Together with \cref{intro--hodge--holomorphic-derham-iso}, this provides the beginning of an answer to \cref{intro--q-alg}: for $K = \lC$, the algebraic de Rham cohomology of $X$ is a purely algebraic construction of the complex cohomology of $X^\an$. But we might further wonder whether or not we may make purely algebraic arguments in studying de Rham cohomology.
+
+For instance, note that our GAGA result \cref{intro--alg--gaga} also shows that the degeneration of the holomorphic Hodge--de Rham spectral sequence \cref{intro--hodge--theory--degen} immediately implies the same result for the algebraic analogue:
+
+\begin{corollary}
+  \label{intro--alg--degen}
+  Suppose $K = \lC$ and $X$ is proper. The algebraic Hodge--de Rham spectral sequence \cref{intro--alg--hodge-ss} degenerates immediately at $E_1$.
+\end{corollary}
+
+We stated this result in its holomorphic guise first because classically Hodge theory is an analytic theory; in particular, the proof of \cref{intro--hodge--theory} relies heavily on analytic methods. But we've now ended up with this purely algebraic consequence, and it is natural to wonder whether it has a purely algebraic proof. More generally, we may wonder which aspects of Hodge theory or what structures on de Rham cohomology are visible from the purely algebraic perspective. These wonderings are precisely what will concern us in this essay.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Overview}
+
+In \cref{degen} we present a purely algebraic proof due to Deligne-Illusie for the degeneration of the algebraic Hodge--de Rham spectral sequence in characteristic zero. Interestingly, the proof crucially involves studying the situation in characteristic $p$.
+
+In \cref{gm} we study how de Rham cohomology varies in families. That is, we will consider the more general situation where we replace our variety $X \to \Spec k$ with an arbitrary map of schemes $X \to S$. In this case we will see there is further structure on de Rham cohomology related to local systems and connections.
+
+

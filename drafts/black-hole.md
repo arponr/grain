@@ -13,9 +13,7 @@ Your tired heart desperately holds on and
 up by the collar, limbs flailing in the skyline,
 for even amidst this gravity
 there are weightless observers,
-there are trains and friends
-to miss and catch,
-there are stairs to climb,
-seas to sail,
+there are trains and friends to miss and catch,
+there are stairs to climb, seas to sail,
 the north star extinguished.
 

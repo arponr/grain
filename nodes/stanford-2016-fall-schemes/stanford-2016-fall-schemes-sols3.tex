@@ -1,0 +1,129 @@
+\input{preamble}
+
+\title{Math 216A Homework 3}
+\author{Arpon Raksit}
+\date{October 13, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\newcommand{\LocRingSpaces}{\mathrm{LocRingSpaces}}
+\newcommand{\Rings}{\mathrm{Rings}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Hartshorne exercise  II.2.4}
+
+\begin{nothing}
+  \label{global-section}
+  Let $X$ be a locally ringed space and $s \in \Gamma(X,\sO_X)$ a global section of its structure sheaf.
+  
+  \begin{subnotation*}
+    For $x \in X$, we will denote the \emph{stalk} of $s$ at $x$ in the local ring $\sO_x$ by $s_x$, and the \emph{value} of $s$ at $x$ in the residue field $\kappa(x) \ce \sO_x/\km_x$ by $s(x)$.
+  \end{subnotation*}
+
+  \begin{subnotation*}
+    We define $X_s \ce \{x \in X : s(x) \ne 0\}$.
+  \end{subnotation*}
+  
+  \begin{sublemma}
+    \label{global-section-nonvanishing-locus}
+    \begin{enumerate}[leftmargin=*]
+    \item \label{global-section-nonvanishing-locus-open} $X_s$ is an open subset of $X$.
+    \item \label{global-section-nonvanishing-locus-invertible} The restriction of $s$ to $X_s$ is invertible in $\Gamma(X_s,\sO_X)$.
+    \end{enumerate}
+  \end{sublemma}
+
+  \begin{proof}
+    Let $x \in X_s$. Then $s(x) \ne 0$ means $s_x \notin \km_x$, and since $\sO_x$ is local this means there exists $t_x \in \sO_x$ such that $s_xt_x = 1$. Thus we can find an open neighborhood $U$ of $x$ and a local section $t \in \Gamma(U,\sO_X)$ with stalk $t_x$ at $x$ such that $s|_Ut = 1 \in \Gamma(U,\sO_X)$. This clearly implies $s(y) \ne 0$ for $y \in U$, i.e. $U \subseteq X_s$. This proves $X_s$ is open.
+
+    We have also proven that we may cover $X_s$ by open subsets $U_i$ which have local sections $t_i \in \Gamma(U_i,\sO_X)$ inverse to (the restrictions of) $s$. But since inverses are unique, these local sections evidently glue to give a well-defined section $t \in \Gamma(X_s,\sO_X)$ inverse to (the restriction of) $s$.
+  \end{proof}
+
+  \begin{sublemma}
+    \label{global-section-nonvanishing-locus-pullback}
+    Let $\pi \c Y \to X$ be a map of locally ringed spaces. Let $\phi \c \Gamma(X,\sO_X) \to \Gamma(Y,\sO_Y)$ denote the pullback of global sections in $\pi$. Then $\pi^{-1}(X_s) = Y_{\phi(s)}$.
+  \end{sublemma}
+
+  \begin{proof}
+    This is immediate from $\pi$ being a map of \emph{locally} ringed spaces, which implies that $s(\pi(y)) = 0 \iff \phi(s)(y) = 0$.
+  \end{proof}
+\end{nothing}
+
+\begin{proposition}
+  \label{affine-adjunction}
+  Let $X$ be a locally ringed space. Let $A$ be a ring. Then the map\footnote{In case it's not clear, here $\LocRingSpaces$ denotes the category of locally ringed spaces and $\Rings$ denotes the category of (commutative, unital) rings.}
+  \[
+    \alpha \c \Map_\LocRingSpaces(X,\Spec A) \to \Map_\Rings(A, \Gamma(X,\sO_X))
+  \]
+  given by taking a map $\pi \c X \to \Spec A$ to pullback of global sections in $\pi$ is a bijection.
+
+  \begin{proof}
+    Let's write $Y \ce \Spec A$.
+    
+    We first prove $\alpha$ is injective. Let $\pi \c X \to \Spec A$ be a map of locally ringed spaces, and let $\phi \ce \alpha(\pi) \c A \to \Gamma(X,\sO_X)$ be pullback of global sections. We will show that $\pi$ is uniquely determined by $\phi$.
+    
+    Let's first consider the map on topological spaces; for $x \in X$ and $s \in A$, we see from \cref{global-section-nonvanishing-locus-pullback} that $x \in \pi^{-1}(Y_s) \iff \phi(s)(x) \ne 0$, or equivalently $\pi(x) \in V(s) \iff \phi(s)(x) = 0$. This implies that $\pi(x)$ must be the prime ideal $\{s \in A : \phi(s)(x) = 0\}$. Hence $\pi$ is determined on topological spaces by $\phi$.
+
+    We now consider the map on structure sheaves $\pi^\sharp \c \sO_Y \to \pi_*\sO_X$. It suffices to show that the map is determined by $\phi$ over the distinguished basic opens $Y_s = D(s)$ for $s \in A$. By \cref{global-section-nonvanishing-locus-pullback} we have $\pi^{-1}(Y_s) = X_{\phi(s)}$. Since $\pi^\sharp$ is a map of sheaves, the diagram
+    \[
+      \begin{tikzcd}
+        \Gamma(Y,\sO_Y) \ar[r, "\pi^\sharp"] \ar[d] &
+        \Gamma(X,\sO_X) \ar[d] \\
+        \Gamma(Y_s,\sO_Y) \ar[r, "\pi^\sharp"] &
+        \Gamma(X_{\phi(s)},\sO_X)
+      \end{tikzcd}
+    \]
+    must commute (where the vertical maps are restriction). But now recall the construction of $\Spec A$: the left map is isomorphic to the localization map $A \to A_s$. By the universal property of localization it follows that the bottom map is determined uniquely by the top map, which is $\phi$. This completes the proof that $\alpha$ is injective.
+
+    We now prove surjectivity, taking cue for our construction from the argument for injectivity. Suppose given a map of rings $\phi \c A \to \Gamma(X,\sO_X)$. We define a map of sets $\pi \c X \to \Spec A$ by setting
+    \[
+      \pi(x) \ce \{s \in A \c \phi(s)(x) = 0 \in \kappa(x)\}
+    \]
+    (it's easy to see this is a prime ideal in $A$). For $s \in A$ we have immediately from the definitions that $\pi^{-1}(D(s)) = X_{\phi(s)}$, which is open by \cref{global-section-nonvanishing-locus}\cref{global-section-nonvanishing-locus-open}; since $\{D(s)\}_{s \in S}$ form a base of $\Spec A$, this implies $\pi$ is in fact continuous.
+
+    Now, again writing $Y \ce \Spec A$, we must define a (local) map of sheaves $\pi^\sharp \c \sO_Y \to \pi_*\sO_X$. It suffices to do so on the distinguished base of opens $\{D(s)\}_{s \in A}$ of $Y$ (in a consistent fashion). Globally, i.e. on $D(1) = Y$, we define $\pi^\sharp \c A = \Gamma(Y,\sO_Y) \to \Gamma(X,\sO_X)$ to be $\phi$; thus, when we've finished constructing the map, we'll have $\alpha(\pi) = \phi$, and hence have proven surjectivity. For each basic open $D(s) = Y_s$ we have from the above that $\pi^{-1}(Y_s) = X_{\phi(s)}$; by \cref{global-section-nonvanishing-locus}\cref{global-section-nonvanishing-locus-invertible} the restriction of $\phi(s)$ to $X_{\phi(s)}$ is invertible. Since $\Gamma(Y,\sO_Y) \to \Gamma(Y_s,\sO_Y)$ is isomorphic to the localization map $A \to A_s$, it follows that there is a unique map $\phi_s$ making the diagram
+    \[
+      \begin{tikzcd}
+        \Gamma(Y,\sO_Y) \ar[r, "\phi"] \ar[d] &
+        \Gamma(X,\sO_X) \ar[d] \\
+        \Gamma(Y_s,\sO_Y) \ar[r, "\phi_s"] &
+        \Gamma(X_{\phi(s)},\sO_X)
+      \end{tikzcd}
+    \]
+    commute; we define $\pi^\sharp$ on $Y_s$ to be $\phi_s$. It is immediate from this construction that whenever $Y_t \subseteq Y_s$ the diagram
+    \[
+      \begin{tikzcd}
+        \Gamma(Y_s,\sO_Y) \ar[r, "\phi_s"] \ar[d] &
+        \Gamma(X_{\phi(s)},\sO_X) \ar[d] \\
+        \Gamma(Y_t,\sO_Y) \ar[r, "\phi_t"] &
+        \Gamma(X_{\phi(t)},\sO_X)
+      \end{tikzcd}
+    \]
+    commutes. Hence $\pi^\sharp$ is a well-defined map of sheaves.
+    
+    Finally, for $x \in X$, we see from the above construction that the induced map on stalks $\pi^\sharp \c A_{\pi(x)} \iso \sO_{\pi(x)} \to \sO_x$ is the localization of the composite $A \to \Gamma(X,\sO_X) \to \sO_x$ at the prime ideal $\pi(x)$. By definition, $\pi(x)$ is the preimage of the maximal ideal $\km_x \subseteq \sO_{\pi(x)}$, and hence this map on stalks is local. Thus $\pi^\sharp$ is a map of locally ringed spaces, finishing the proof.
+  \end{proof}
+
+  \begin{subremark}
+    \label{affine-adjunction-affine-case}
+    Suppose we take $X$ to be an affine scheme $\Spec B$ in the above. Then from the construction of the proof we see that $\alpha^{-1}$ is given precisely by applying the functor $\Spec$.
+  \end{subremark}
+
+  \begin{subcorollary}
+    \label{affine-adjunction-unit}
+    For any locally ringed space $X$, there is a natural map of locally ringed spaces $\eta \c X \to \Spec \Gamma(X,\sO_X)$, which is an isomorphism if and only if $X$ is an affine scheme.
+
+    \begin{proof}
+      The map $\eta$ corresponds to the identity map of rings $\Gamma(X,\sO_X) \to \Gamma(X,\sO_X)$ under the bijection $\alpha^{-1}$ of \cref{affine-adjunction}. If $\eta$ is an isomorphism then $X \iso \Spec \Gamma(X,\sO_X)$ is tautologically an affine scheme. The converse, that $\eta$ is an isomorphism if $X$ is affine, follows from \cref{affine-adjunction-affine-case}.
+    \end{proof}
+  \end{subcorollary}
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

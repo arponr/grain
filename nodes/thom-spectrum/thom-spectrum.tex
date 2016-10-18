@@ -1,0 +1,191 @@
+\input{preamble}
+
+\title{Thom spectra}
+\author{Arpon Raksit}
+\date{January 14, 2016}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+\maketitle
+
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Line}{\mathrm{Line}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Spaces}{\mathrm{Spaces}}
+\newcommand{\Spectra}{\mathrm{Spectra}}
+\newcommand{\cofib}{\operatorname*{cofib}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Thom spectra in general}
+
+In this section we formulate the Thom spectrum and the Thom isomorphism very generally, following [ABGHR](//arxiv.org/pdf/1403.4325v1.pdf). In the following sections we show how this formulation recovers the more classical notions of Thom space associated to vector/sphere bundles.
+
+\begin{notation}
+  Let $R$ be an $\rE_1$-ring spectrum. We denote the $\infty$-category of (left or right, just pick one to use throughout) $R$-module spectra by $\Mod(R)$. We denote the maximal subgroupoid of $\Mod(R)$ containing $R$ by $\Line(R)$.
+\end{notation}
+
+\begin{definition}
+  Define the space $\GL_1(R)$ by the pullback
+  \[
+    \GL_1(R) \ce \Omega^{\infty}R \times_{\pi_0 R} (\pi_0 R)^\times.
+  \]
+  Since $R$ is an $\rE_1$-ring, $\GL_1(R)$ is an $\rE_1$-space, i.e. an $\infty$-group, hence has a delooping $\rB\GL_1(R)$. We call $\GL_1(R)$ the \emph{group of units} of $R$.
+\end{definition}
+
+\begin{lemma}
+  \label{gl1-equiv-line}
+  There's an equivalence of $\infty$-groups $\Aut_{\Mod(R)}(R) \iso \GL_1(R)$, and hence an equivalence of $\infty$-groupoids/spaces $\Line(R) \iso \rB\GL_1(R)$.
+\end{lemma}
+
+\begin{definition}
+  Define the \emph{Thom spectrum} functor
+  \[
+    \rM \c \Spaces_{/\rB\GL_1(R)} \to \Mod(R)
+  \]
+  by sending a map $f \c X \to \rB\GL_1(R)$ to the colimit
+  \[
+    \rM f \ce  \colim \l(
+    X \lblto{f} \rB\GL_1(R) \iso \Line(R) \inj \Mod(R) \r).
+  \]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Thom spectra of pointed sphere bundles}
+\label{thom-ptd-sphere}
+
+Our first stop on the way from the general Thom spectrum functor to Thom spectra of vector bundles is essentially to understand a part of the case when $R$ is the sphere spectrum.
+
+\begin{definition}
+  \label{ptd-sphere-bundle}
+  A \label{pointed sphere bundle} of dimension $n \in \lZ_{\ge 0}$ over a space $X$ is a pair $(f, s)$ where
+  \begin{enumerate}
+  \item $f$ is a map of spaces $E \to X$ such that for every
+    $x \in X$ the (homotopy) fiber $E_x$ is equivalent to the sphere
+    $\rS^n$;
+  \item $s$ is a section $X \to E$ of $f$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  \label{thom-spectrum-ptd-sphere}
+  Let $(f \c E \to X, s \c X \to E)$ be a pointed sphere bundle of dimension $n \in \lZ_{\ge 0}$. We define the \emph{Thom space} $\o\rM f$ of $(f,s)$ to be the (homotopy) cofiber of $s$, i.e.
+  \[
+    \o\rM f \ce \cofib \l( X \lblto{s} E \r).
+  \]
+  We define the \emph{Thom spectrum} $\rM f$ of $(f,s)$ as the $n$-fold desuspension of the suspension spectrum of the Thom space $\o\rM f$, i.e.
+  \[
+    \rM f \ce \Sigma^{\infty - n} \o\rM f.
+  \]
+\end{definition}
+
+\begin{notation}
+  \label{sphere-spectrum}
+  Let $\rS \ce \Sigma^\infty\rS^0$ denote the sphere spectrum. Recall that $\Mod(\rS)$ is just the $\infty$-category $\Spectra$ of spectra.
+\end{notation}
+
+\begin{definition}
+  \label{stable-spherical-fibration}
+  A \emph{stable sphere bundle} over a space $X$ is a functor $X \to \rB\GL_1(\rS)$.
+\end{definition}
+
+\begin{lemma}
+  \label{gl1-sphere}
+  There's an equivalence of $\infty$-groups
+  \[
+    \colim_{n \in \lZ_{\ge 0}} \Aut_{\Spaces_*}(\rS^n) \isoto
+    \GL_1(\rS)
+  \]
+  induced by the maps $\Aut_{\Spaces_*}(\rS^n) \to \GL_1(\rS)$ sending a map $f \c \rS^n \to \rS^n$ to the map $\Sigma^{\infty - n}f \c \rS \to \rS$ in $\Aut_{\Spectra}(\rS)$, which is equivalent to $\GL_1(\rS)$ by @gl1-equiv-line.
+
+  This induces an equivalence of $\infty$-groupoids
+  \[
+    \colim_{n \in \lZ_{\ge 0}} \rB\Aut_{\Spaces_*}(\rS^n) \iso
+    \rB\GL_1(\rS).
+  \]
+\end{lemma}
+
+\begin{construction}
+  \label{ptd-sphere-to-stable-sphere}
+  Here we associate to any pointed sphere bundle over $X$ a stable sphere bundle over $X$.
+
+  Let $(f \c E \to X, s \c X \to E)$ be a pointed sphere bundle of dimension $n \in \lZ_{\ge 0}$. By the Grothendieck construction this data is equivalent to a functor $X \to \Spaces_*$ factoring through the maximal subgroupoid of $\Spaces_*$ containing $\rS^n$ (equipped with some chosen basepoint), i.e. a functor/map $F \c X \to \rB\Aut_{\Spaces_*}(\rS^n)$. As stated in @gl1-sphere there's a canonical map $\rB\Aut_{\Spaces_*}(\rS^n) \to \rB\GL_1(\rS)$; composing $F$ with this map gives us the desired stable sphere bundle $X \to \rB\GL_1(\rS)$.
+\end{construction}
+
+\begin{lemma}
+  \label{thom-ptd-sphere-agrees}
+  Let $(f \c E \to X, s \c X \to E)$ be a pointed sphere bundle of dimension $n \in \lZ_{\ge 0}$. Let $g \c X \to \rB\GL_1(\rS)$ be the associated stable sphere bundle constructed in @ptd-sphere-to-stable-sphere. Then our two definitions of Thom spectrum agree: $\rM f \iso \rM g$.
+\end{lemma}
+
+\begin{proof}
+  Consider the diagram of functors
+  \[
+    \begin{tikzcd}
+      \Fun(X, \rB\Aut_{\Spaces_*}(\rS^n)) \ar[d] \ar[r] &
+      \Fun(X, \Spaces_*) \ar[d, "\Sigma^{\infty - n}"] \ar[r, "\colim"] &
+      \Spaces_* \ar[d, "\Sigma^{\infty - n}"] \\
+      \Fun(X, \rB\GL_1(\rS)) \ar[r] &
+      \Fun(X, \Spectra) \ar[r, "\colim"] &
+      \Spectra.
+    \end{tikzcd}
+  \]
+  The left-hand square commutes by the definition (see @gl1-sphere) of the map $\rB\Aut_{\Spaces_*}(\rS^n) \to \rB\GL_1(\rS)$ inducing the left-hand vertical arrow. The right-hand square commutes because $\Sigma^\infty$ is a left-adjoint and hence commutes with colimits. Hence the whole diagram commutes. Now, via the Grothendieck construction the composite of the top row can be identified with the Thom space construction for pointed sphere bundles $(f,s) \mapsto \o\rM f$, whence going around the diagram clockwise gives the Thom spectrum $\rM f$. On the other hand going around the diagram counter-clockwise gives the Thom spectrum $\rM g$, finishing the proof.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Thom spectra of sphere bundles}
+\label{thom-sphere}
+
+Here's an alternate take on @thom-ptd-sphere where instead of requiring pointedness built into our sphere bundles we install it ourselves manually via a suspension. (We'll see below that this amounts in the case of vector bundles to considering the unit sphere sub-bundle instead of the fiberwise one-point compactification.)
+
+\begin{definition}
+  \label{sphere-bundle}
+  A \emph{sphere bundle} of dimension $n \in \lZ_{\ge 0}$ over a space $X$ is a map of spaces $E \to X$ such that for every $x \in X$ the (homotopy) fiber $E_x$ is equivalent to the sphere $\rS^n$.
+\end{definition}
+
+\begin{definition}
+  \label{thom-spectrum-sphere}
+  Let $f \c E \to X$ be a sphere bundle of dimension $n \in \lZ_{\ge 1}$. We define the \emph{Thom space} $\o\rM f$ of $f$ to be the (homotopy) cofiber of $f$, i.e.
+  \[
+    \o\rM f \ce \cofib \l( E \lblto{f} X \r).
+  \]
+  We define the \emph{Thom spectrum} $\rM f$ of $f$ as the $(n+1)$-fold desuspension of the suspension spectrum of the Thom space $\o\rM f$, i.e.
+  \[
+    \rM f \ce \Sigma^{\infty - n-1} \o\rM f.
+  \]
+\end{definition}
+
+\begin{construction}
+  \label{sphere-to-ptd-sphere}
+  Here we associate to any sphere bundle $f \c E \to X$ of dimension $n \in \lZ_{\ge 0}$ a pointed sphere bundle of dimension $n+1$ over $X$.
+
+  By the Grothendieck construction we identify $f$ with a functor $X \to \Spaces$ factoring through the maximal subgroupoid $\rB\Aut_{\Spaces}(\rS^n)$ of $\Spaces$ containing $\rS^n$. Composing with the suspension functor $\Sigma \c \Spaces \to \Spaces_*$ (where we take the basepoint to be the top of the suspension, say) gives us a functor $X \to \Spaces_*$ factoring through the maximal subgroupoid $\rB\Aut_{\Spaces_*}(\rS^{n+1})$ containing $\rS^{n+1}$, and again by the Grothendieck construction this is the pointed sphere bundle of dimension $n+1$ we wanted.
+\end{construction}
+
+\begin{lemma}
+  \label{thom-sphere-agrees}
+  Let $f \c E \to X$ be a sphere bundle of dimension $n \in \lZ_{\ge 0}$. Let $(g \c E' \to X, s \c X \to E')$ be the associated pointed sphere bundle of dimension $n+1$ constructed in @sphere-to-ptd-sphere. Then our two definitions of Thom space agree: $\o\rM f \iso \o\rM g$. It follows immediately that the Thom spectra agree as well: $\rM f \iso \rM g$.
+\end{lemma}
+
+\begin{proof}
+  Consider the diagram of functors
+  \[
+    \begin{tikzcd}
+      \Fun(X, \rB\Aut_{\Spaces}(\rS^n)) \ar[d] \ar[r] &
+      \Fun(X, \Spaces) \ar[d, "\Sigma \iso \cofib(- \to *)"] \ar[r, "\colim"] &
+      \Spaces_{/X} \ar[d, "\cofib"] \\
+      \Fun(X, \rB\Aut_{\Spaces_*}(\rS^{n+1})) \ar[r] &
+      \Fun(X, \Spaces_*) \ar[r, "\colim"] &
+      \Spaces_*.
+    \end{tikzcd}
+  \]
+  The left-hand square commutes by the definition (see @sphere-to-ptd-sphere) of the map $\rB\Aut_{\Spaces}(\rS^n) \to rB\Aut_{\Spaces_*}(\rS^{n+1})$ inducing the left-hand vertical arrow. The right-hand square commutes because colimits commute with cofibers. Hence the whole diagram commutes. Now, the top-right horizontal map is the Grothendieck construction, whence going around the diagram clockwise gives the Thom space $\o\rM f$. On the other hand, as in the proof of @thom-ptd-sphere-agrees, going around the diagram counter-clockwise gives the Thom space $\o\rM g$, finishing the proof.
+\end{proof}
+
+% \bibliographystyle{amsalpha}
+% \bibliography{refs}
+
+\end{document}

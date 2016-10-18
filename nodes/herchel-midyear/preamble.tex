@@ -1,20 +1,13 @@
-\documentclass[11pt,leqno]{article}
-
-\linespread{1.07}
-\frenchspacing
+\documentclass[10pt,leqno]{article}
 
 \usepackage[%
-  tmargin=1in,bmargin=1in,%
-  lmargin=1.6in,rmargin=1.6in,%
-  %marginparsep=0.2in, marginparwidth=1.8in%
+  tmargin=1.2in,bmargin=1.2in,%
+  lmargin=1.8in,rmargin=1.8in,%
 ]{geometry}
-\setlength{\skip\footins}{3.0ex}
-
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{appendix}
 \usepackage{microtype}
-\usepackage[bottom]{footmisc}
 \usepackage[hyphens]{url}
 \usepackage{enumitem}
 \usepackage{xspace}
@@ -24,30 +17,29 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 
-
+\usepackage{amsmath}
 \definecolor{darkred}{rgb}{0.5,0.0,0.0}
 \usepackage[%
-  hyperfootnotes=false,
   colorlinks,%
   linkcolor=darkred,%
   citecolor=darkred,%
   urlcolor=darkred,%
 ]{hyperref}
-\urlstyle{rm}
-
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage{fourier}
-\usepackage[osf,scaled=.92]{heuristica}
+\usepackage{amsthm,amssymb}
+\usepackage[largesc, scaled=0.96]{newpxtext}
+\usepackage[bigdelims, scaled=0.96]{newpxmath}
+\useosf
 \usepackage[%
-  cal=euler,   calscaled=0.96,%
-  scr=boondox, scrscaled=0.95,%
+  cal=euler,   calscaled=0.98,%
+  scr=boondox, scrscaled=1.0,%
   bb=boondox,  bbscaled=1.0,%
 ]{mathalfa}
 \usepackage{cleveref}
 \usepackage{xr}
 
-
-
+\linespread{1.06}
+\frenchspacing
+\urlstyle{rm}
 
 \AtBeginDocument{%
   \setlength{\abovedisplayskip}{1.5ex plus 0.3ex minus 0.3ex}%
@@ -77,24 +69,20 @@
 \renewcommand{\maketitle}{%
   \begin{flushleft}
     {\bfseries\MakeUppercase{%
-      \thetitle}}\\[1.5ex]
+      \thetitle}}\\[2.5ex]
     {\footnotesize\MakeUppercase{%
-      \theauthor}}\\[1.5ex]
+      \theauthor}}\\[2.5ex]
     \ifthenelse{\equal{\thedate}{}}{}{%
       \small%
       % \setlength{\tabcolsep}{0.2em}%
       % \begin{tabular}{rl}
-        original: \thedate \\
-        updated: \today
+        \thedate
       % \end{tabular}
     }
   \end{flushleft}
-  \vspace{2.5ex}
+  \vspace{5ex}
   \thispagestyle{fancy}
 }
-
-\renewenvironment{abstract}{\section*{Abstract}}{}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -117,21 +105,22 @@
 \renewcommand{\eqref}[1]{{\mytagform@{\ref{#1}}}}
 \makeatother
 
-\titleformat{\section}{\bfseries}{\llap{\S\thesection\hspace{\tagsep}}}{0em}{}
-\titlespacing*{\section}{0pt}{*6}{*2}
-\titleformat{\subsection}{\ttfamily}{\llap{\S\thesubsection\hspace{\tagsep}}}{0em}{}
-\titlespacing*{\subsection}{0pt}{*4}{*2}
+\titleformat{\section}{}{\llap{{\small\S}\,\thesection\hspace{\tagsep}}}{0em}{%
+  \fontsize{10.5}{12}\selectfont\scshape\MakeLowercase}
+\titlespacing*{\section}{0pt}{*6}{*3}
+\titleformat{\subsection}{\bfseries}{\thesubsection.}{0.4em}{}
+\titlespacing*{\subsection}{0pt}{*2.5}{*1}
 
 % Display format for equations
 \newcommand{\crefeqfmt}[1]{
-  \crefformat{#1}{(##2##1##3)}
-  \Crefformat{#1}{(##2##1##3)}
-  \crefrangeformat{#1}{(##3##1##4--##5##2##6)}
-  \Crefrangeformat{#1}{(##3##1##4--##5##2##6)}
-  \crefmultiformat{#1}{(##2##1##3}{, ##2##1##3)}{, ##2##1##3}{, ##2##1##3)}
-  \Crefmultiformat{#1}{(##2##1##3}{, ##2##1##3)}{, ##2##1##3}{, ##2##1##3)}
-  \crefrangemultiformat{#1}{(##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6)}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6)}
-  \Crefrangemultiformat{#1}{(##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6)}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6)}
+  \crefformat{#1}{[##2##1##3]}
+  \Crefformat{#1}{[##2##1##3]}
+  \crefrangeformat{#1}{[##3##1##4--##5##2##6]}
+  \Crefrangeformat{#1}{[##3##1##4--##5##2##6]}
+  \crefmultiformat{#1}{[##2##1##3}{, ##2##1##3]}{, ##2##1##3}{, ##2##1##3]}
+  \Crefmultiformat{#1}{[##2##1##3}{, ##2##1##3]}{, ##2##1##3}{, ##2##1##3]}
+  \crefrangemultiformat{#1}{[##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}
+  \Crefrangemultiformat{#1}{[##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}{, ##3##1##4--##5##2##6}{, ##3##1##4--##5##2##6]}
 }
 % Display format for sections
 \newcommand{\crefsecfmt}[1]{%
@@ -158,26 +147,28 @@
 
 
 \newcommand{\thmnumfont}{}
-\newcommand{\thmheadfont}{\scshape}
-\newcommand{\thmhorizspace}{0.3em}
+\newcommand{\thmheadfont}{\bfseries}
+\newcommand{\thmnotefont}{\bfseries}
+\newcommand{\thmhorizspace}{0.4em}
 \newcommand{\thmnotespace}{0.25em}
 \newcommand{\thmsep}{\hspace{\thmhorizspace}---}
 
-\newtheoremstyle{block}%
-  {1.5ex plus 0.1ex minus 0.1ex}% Space above
-  {1.5ex plus 0.1ex minus 0.1ex}% Space below
-  {}% Body font
-  {}% Indent amount
-  {\thmheadfont} % Theorem head font
-  {}% Punctuation after theorem head
-  {0em}% Space after theorem head
-  {\llap{\thmnumber{{\thmnumfont #2}\hspace{\tagsep}}}%
-    \thmname{#1}%
-    \thmnote{\hspace{\thmnotespace}\thmnotefont(#3)}%
-    \@ifnotempty{#1}{\thmsep\hspace{\thmhorizspace}}%
-  }% Custom head spec
+\def\swappedhead#1#2#3{%
+ \llap{\thmnumber{\@upn{{\thmnumfont#2}}\hspace{\tagsep}}}%
+  \thmname{\thmheadfont#1}%
+  \@ifnotempty{#3}{\hspace{\thmnotespace}\thmnote{\thmnotefont(#3)}}%
+}
+\swapnumbers
 
-\newcommand{\defemph}[1]{\textit{#1}}
+\newtheoremstyle{block}%
+  {2.0ex plus 0.2ex minus 0.1ex}% Space above
+  {2.0ex plus 0.2ex minus 0.1ex}% Space below
+  {} % Body font
+  {} % Indent amount
+  {} % Theorem head font
+  {\thmsep} % Punctuation after theorem head
+  {\thmhorizspace} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning ‘normal’)
 
 \renewenvironment{proof}[1][Proof]{\par
   \pushQED{\qed}%
@@ -194,19 +185,10 @@
 
 \theoremstyle{block}
 
-\newcounter{block}
-\newcounter{subblock}
-\numberwithin{equation}{block}
-\numberwithin{subblock}{block}
-
 \newcommand{\defthm}[2]{%
-  \newtheorem{#1}[block]{#2}%
+  \newtheorem{#1}[equation]{#2}%
   \crefeqfmt{#1}%
   \newtheorem*{#1*}{#2}%
-
-  \newtheorem{sub#1}[subblock]{#2}%
-  \crefeqfmt{sub#1}%
-  \newtheorem*{sub#1*}{#2}%
 }
 
 \defthm{algorithm}{Algorithm}
@@ -227,7 +209,6 @@
 \defthm{nothing}{}
 \defthm{proposition}{Proposition}
 \defthm{question}{Question}
-\defthm{recall}{Recall}
 \defthm{remark}{Remark}
 \defthm{remarks}{Remarks}
 \defthm{situation}{Situation}
@@ -301,7 +282,6 @@
   \externalcrefeqfmt{#1}{nothing}
   \externalcrefeqfmt{#1}{proposition}
   \externalcrefeqfmt{#1}{question}
-  \externalcrefeqfmt{#1}{recall}
   \externalcrefeqfmt{#1}{remark}
   \externalcrefeqfmt{#1}{remarks}
   \externalcrefeqfmt{#1}{situation}
@@ -323,7 +303,7 @@
 
 \setlist[enumerate, 1]{%
   label=(\emph{\alph*}),%
-  ref={\emph{\alph*}},%
+  ref={\theequation\,(\emph{\alph*})},%
   widest=d,
 }
 \setlist[enumerate, 2]{%
@@ -427,7 +407,7 @@
   diagrams={>={stealth}},
 }
 
-\newcommand{\arrlen}{1.25em}
+\newcommand{\arrlen}{1em}
 \renewcommand{\to}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->](0,0.5ex)--(\arrlen,0.5ex);}}
 \newcommand{\from}{\mathrel{\tikz[baseline]%
@@ -447,11 +427,6 @@
   \begin{tikzpicture}[baseline]%
     \draw[>=stealth,->](0,0.15ex)--(\arrlen,0.15ex);%
     \draw[>=stealth,->](0,0.85ex)--(\arrlen,0.85ex);%
-  \end{tikzpicture}}}
-\newcommand{\goesto}{\mathrel{%
-  \begin{tikzpicture}[baseline= {( $ (current bounding box.south) + (0,-0.3ex) $ )}]%
-    \draw[>=stealth,->,decorate,%
-          decoration={zigzag,amplitude=0.15ex,segment length=0.35em,pre=lineto,pre length=.15em,post=lineto,post length=.3em}](0,0.15ex)--(\arrlen,0.15ex);%
   \end{tikzpicture}}}
 \newcommand{\lblto}[1]{\mathrel{%
     \begin{tikzpicture}[baseline= {( $ (current bounding box.south) + (0,-0.5ex) $ )}]
@@ -506,20 +481,18 @@
 
 \renewcommand{\l}{\left}
 \renewcommand{\r}{\right}
-\renewcommand{\f}{\frac}
+\newcommand{\f}{\frac}
 \renewcommand{\o}{\overline}
 \renewcommand{\u}{\underline}
 \newcommand{\til}{\widetilde}
 \renewcommand{\hat}{\widehat}
 \newcommand{\del}{\partial}
-\newcommand{\bul}{\bullet}
 \newcommand{\dash}{\text{-}}
 \renewcommand{\c}{\colon}
 \newcommand{\lc}{\,:\!}
 \newcommand{\ce}{\mathrel{:=}}%{\coloneq}
 \newcommand{\ec}{\mathrel{=:}}%{\eqcolon}
 \newcommand{\iso}{\simeq}
-\newcommand{\lbliso}[1]{\overset{#1}{\simeq}}
 \newcommand{\dual}[1]{#1^\vee}
 \newcommand{\ldb}{\llbracket}
 \newcommand{\rdb}{\rrbracket}
@@ -535,17 +508,12 @@
 \newcommand{\Iso}{\operatorname{Iso}}
 \renewcommand{\id}{\mathrm{id}}
 \renewcommand{\im}{\operatorname{im}}
-\newcommand{\pt}{\star}
 \newcommand{\op}{\mathrm{op}}
 \newcommand{\univ}{\mathrm{univ}}
 \newcommand{\colim}{\operatorname*{colim}}
-\newcommand{\coeq}{\operatorname*{coeq}}
-\newcommand{\eq}{\operatorname*{eq}}
 \newcommand{\dlim}{\displaystyle\lim}
 \newcommand{\dcolim}{\displaystyle\colim}
 \newcommand{\Spec}{\operatorname{Spec}}
-\newcommand{\Specm}{\operatorname{Spec_m}}
 \newcommand{\Spf}{\operatorname{Spf}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
