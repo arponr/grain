@@ -1,0 +1,108 @@
+\input{preamble}
+
+\title{Math 216A Homework 9}
+\author{Arpon Raksit}
+\date{December 1, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Geometric connectedness}
+
+\begin{nothing}
+  \label{pointset}
+
+  Let $\pi \c Y \to X$ be a map of topological spaces. Let $\sC_X,\sC_Y$ denote the sets of connected components in $X,Y$. Note that since images of connected spaces are connected, $\pi$ induces a map of sets $\pi_* \c \sC_Y \to \sC_X$.
+
+  \begin{sublemma}
+    \label{pointset-component-bijection}
+    Suppose that for any connected component $C$ of $X$ the preimage $\pi^{-1}(C)$ is connected. Then $\pi_* \c \sC_Y \to \sC_X$ is a bijection.
+
+    \begin{proof}
+      In this case, taking preimages defines a two-sided inverse $\pi^{-1} \c \sC_X \to \sC_Y$ to $\pi_*$.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{sublemma}
+    \label{pointset-connected-fibers}
+    Suppose that:
+    \begin{enumerate}
+    \item $\pi$ is open or closed; 
+    \item the fibers of $\pi$ are connected (in particular nonempty, so $\pi$ is surjective). 
+    \end{enumerate}
+    Then $\pi_* \c \sC_Y \to \sC_X$ is a bijection.
+
+    \begin{proof}
+      By \cref{pointset-component-bijection} it suffices to show that the preimage of any connected component $C$ of $X$ is connected. Thus we may reduce to the case that $X$ is connected, where we want to show $Y$ is connected.
+
+      Suppose not: then we may write $Y = A \amalg B$ with $A,B$ nonempty and clopen subspaces of $Y$. Since $\pi$ is surjective we have $X = \pi(A) \cup \pi(B)$. Since $X$ is connected, and $\pi$ is open or closed, $\pi(A)$ and $\pi(B)$ cannot be disjoint; thus we may choose $x \in \pi(A) \cap \pi(B)$. That means the fiber $Y_x$ meets both $A$ and $B$, and hence $Y_x = (A \cap Y_x) \amalg (B \cap Y_x)$ is disconnected. This proves the claim.
+    \end{proof}
+  \end{sublemma}
+\end{nothing}
+
+\begin{proposition}
+  \label{alg-closed-connected}
+  Let $X$ be a scheme over an algebraically closed field $k$. Let $K/k$ be an extension field, and let $X_K \ce X \times_k K$ be the base-change. Then the projection $\pi \c X_K \to X$ induces a bijection on connected components; in particular, $X_K$ is connected if and only if $X$ is connected.
+
+  \begin{proof}
+    By exercise 2(iv) the map $\pi \c X_K \to X$ is open. So by \cref{pointset-connected-fibers} it suffices to show the fibers of $\pi$ are connected.
+
+    Pick any point $x \in X$, and consider the canonical map $\Spec(\kappa(x)) \to X$. The fiber of $X_K$ over $x$ is given by
+    \[
+      X_K \times_X \Spec(\kappa(x)) \iso \Spec(K) \times_{\Spec(k)} X \times_X \Spec(\kappa(x)) \iso \Spec(K \otimes_k \kappa(x)).
+    \]
+    In homework 1 we proved that, since $k$ is algebraically closed, $K \otimes_k \kappa(x)$ is a domain; hence its spectrum is connected.
+  \end{proof}
+\end{proposition}
+
+\begin{proposition}
+  \label{geom-alg-closed}
+  Let $X$ be a scheme over a field $k$. The following are equivalent:
+  \begin{enumerate}
+  \item \label{geom-alg-closed-geom} The base-change $X_K \ce X \times_k K$ is connected for every extension $K/k$.
+  \item \label{geom-alg-closed-alg-closed} The base-change $X_{\kbar} \ce X \times_k \kbar$ is connected, where $\kbar$ is any algebraic closure of $k$.
+  \end{enumerate}
+
+  \begin{proof}
+    \cref{geom-alg-closed-geom} $\shimplies$ \cref{geom-alg-closed-alg-closed}: Tautological.
+
+    \cref{geom-alg-closed-alg-closed} $\shimplies$ \cref{geom-alg-closed-geom}:  Let $K/k$ be any extension. Let $\kbar$ and $\Kbar$ be algebraic closures of $k$ and $K$. The canonical map
+    \[
+      X_{\Kbar} \ce X \times_k \Kbar \iso X_K \times_K \Kbar \to X_K
+    \]
+    is surjective, so it suffices to show $X_{\Kbar}$ is connected. We may embed $\kbar$ as a subextension of $\Kbar/k$, and then we're done by \cref{alg-closed-connected}.
+  \end{proof}
+\end{proposition}
+
+\begin{proposition}
+  \label{rational-connected}
+  Let $X$ be a scheme over a field $k$. Suppose $X$ has a $k$-rational point. Let $K/k$ be an extension field. If $X$ is connected, then the base change $X_K \ce X \times_k K$ is connected.
+
+  \begin{proof}
+    By \cref{geom-alg-closed} we may reduce to the case $K = \kbar$. Suppose $X_K = X_{\kbar}$ is not connected, so we may write $X_K = A \amalg B$ for $A,B$ nonempty clopen subspaces. Let $\pi \c X_K \to X$ be the projection. Let $x \c \Spec k \to X$ be a $k$-rational point, and observe that the fiber $(X_K)_x$ is
+    \[
+      X_K \times_X \Spec(k) \iso \Spec(K) \times_{\Spec(k)} X \times_X \Spec(k) \iso \Spec(K),
+    \]
+     hence is a single point $x' \in X_K$. Without loss of generality suppose $x' \in A$, so $x' \notin B$, and hence (by the above computation of the fiber) $\pi(B)$ does not contain $x$ and hence is a proper nonempty subspace of $X$. But now, as $\Spec(K) = \Spec(\kbar) \to \Spec(k)$ is an integral map, so is its base change $\pi \c X_K \to X$, so $\pi$ is closed. And by exercise 2(iv), $\pi$ is open. Thus $B$ being clopen implies $\pi(B)$ is clopen, and hence $X$ is also not connected.
+  \end{proof}
+\end{proposition}
+
+\begin{proposition}
+  \label{geom-connected}
+  Let $X$ be a scheme locally of finite type over a field $k$. Suppose $X \times_k L$ is connected for all finite separable extensions $L/k$. Then $X \times_k K$ is connected for all extensions $K/k$.
+
+  \begin{proof}
+    By \cref{geom-alg-closed} it suffices to show $X \times_k \kbar$ is connected. Since $X$ is locally of finite type over $k$, it has a closed point $x$, and moreover $\kappa(x)/k$ is a finite extension. Then $X \times_k \kappa(x)$ is a scheme over $\kappa(x)$ with a $\kappa(x)$-rational point, and we may embed $\kappa(x)$ in $\kbar$, so by \cref{rational-connected} it suffices to show $X \times_k \kappa(x)$ is connected. Let $L/k$ be the maximal separable subextension of $\kappa(x)$. Then $\kappa(x)/L$ is purely inseparable, so $\Spec(\kappa(x)) \to \Spec(L)$ is a universal homeomorphism, and thus $X \times_k \kappa(x)$ is homeomorphic to $X \times_k L$, which is connected by hypothesis, finishing the proof.
+  \end{proof}
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

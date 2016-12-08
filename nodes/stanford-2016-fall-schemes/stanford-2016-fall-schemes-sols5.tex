@@ -1,0 +1,123 @@
+\input{preamble}
+
+\title{Math 216A Homework 5}
+\author{Arpon Raksit}
+\date{October 26, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Normalization}
+
+Let $X$ be an integral scheme.
+
+\begin{definition}
+  \label{normalization}
+  We say an $X$-scheme $\pi \c \til{X} \to X$ exhibits $\til{X}$ as a \emph{normalization} of $X$ if:
+  \begin{enumerate}
+  \item $\til{X}$ is normal and integral, and $\pi$ is dominant;
+  \item for any normal and integral scheme $Y$ and dominant map of schemes $\rho \c Y \to X$, there exists a unique map $\til{\rho} \c Y \to \til{X}$ over $X$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  \label{normalization-unique}
+   By the usual universal property/final object/Yoneda business, a normalization of $X$ is unique up to unique isomorphism (as an $X$-scheme). So from here on out we are entitled to call something \emph{the} normalization rather than \emph{a} normalization.
+\end{remark}
+
+\begin{remark}
+  \label{irreducible-dominant-generic}
+  Recall (as stated on the homework for exercise 3.7) that a map $\pi \c T \to S$ of irreducible schemes is dominant if and only if it takes the generic point of $Y$ to the generic point of $S$. This in particular implies that such a $\pi$ is irreducible if and only if for any single nonempty open $U \subseteq S$ and open $V \subseteq \pi^{-1}(U)$ the restriction $\pi|_V \c V \to U$ is dominant.
+\end{remark}
+
+\begin{lemma}
+  \label{normalization-restricts-to-open}
+  Let $U \subseteq X$ be a nonempty open subscheme (note $U$ is still integral). Suppose given a normalization $\pi \c \til{X} \to X$ of $X$. Let $\til{U} \ce \pi^{-1}(U)$. Then the restriction $\pi|_{\til{U}} \c \til{U} \to U$ exhibits $\til{U}$ as the normalization of $U$.
+
+  \begin{proof}
+    Since $\til{U}$ is an open subscheme of $\til{X}$, it's clear that $\til{U}$ is normal and integral. And since $U$ is nonempty it is immediate from \cref{irreducible-dominant-generic} that the restriction $\pi|_{\til{U}}$ remains dominant.
+
+    Now suppose given a dominant map of schemes $\rho \c Y \to U$ with $Y$ normal and integral. The composite $Y \to U \inj X$ factors uniquely through $\pi \c \til{X} \to X$, so it's clear that $\rho$ factors uniquely through $\pi|_{\til{U}} \c \til{U} \to Y$.
+  \end{proof}
+\end{lemma}
+
+\begin{proposition}
+  \label{normalization-glues-from-opens}
+  Let $\{U_i\}_{i \in I}$ be an cover of $X$ by nonempty opens. Suppose given normalizations $\pi_i \c \til{U}_i \to U_i$ of $U_i$ for each $i \in I$. Then these glue to a map $\pi \c \til{X} \to X$ exhibiting $\til{X}$ as the normalization of $X$.
+
+  \begin{proof}
+    To construct $\pi \c \til{X} \to X$, we need to exhibit isomorphisms
+    \[
+      \phi_{i,j} \c \pi_i^{-1}(U_i \cap U_j) \isoto \pi_j^{-1}(U_i \cap U_j)
+    \]
+    that are coherent in the usual sense. But this data comes to us immediately from the fact that normalizations restrict well to open subschemes \cref{normalization-restricts-to-open} together with the uniqueness of normalization up to unique isomorphism \cref{normalization-unique}.
+
+    By construction $\til{X}$ has an open cover by normal integral schemes, hence itself is a normal integral scheme. And $\pi$ is dominant by \cref{irreducible-dominant-generic}.
+
+    Suppose given a dominant map of schemes $\rho \c Y \to X$ with $Y$ normal and integral. For $i \in I$, let $Y_i \ce \rho^{-1}(U_i)$ and let $\rho_i \ce \rho|_{Y_i} \c Y_i \to U_i$ denote the restriction. Then each $Y_i$ is an open subscheme of $Y$, hence normal and integral, and by \cref{irreducible-dominant-generic} $\rho_i$ is dominant, so we obtain unique maps $\til{\rho}_i \c Y_i \to \til{U}_i$ over $U_i$. As noted in the construction of $\til{X}$, by \cref{normalization-restricts-to-open} the intersection $\til{U}_i \cap \til{U}_j$ in $\til{X}$ is the normalization of $U_i \cap U_j$. Thus the two maps
+    \[
+      \til{\rho}_i|_{Y_i \cap Y_j}, \til{\rho}_j|_{Y_i \cap Y_j} \c Y_i \cap Y_j \to \til{U}_i \cap \til{U}_j,
+    \]
+    both lifting $\rho|_{Y_i \cap Y_j} \c Y_i \cap U_j \to U_i \cap U_j$, must be equal. Hence we may glue the lifts $\til{\rho}_i$ to obtain a lift $\til{\rho} \c Y \to \til{X}$ of $\rho$. The lift is unique since the lifts $\til{\rho}_i$ were unique. Thus $\til{X}$ is indeed the normalization of $X$.
+  \end{proof}
+\end{proposition}
+
+\begin{nothing}
+  \label{normalization-affine}
+  Now suppose $X$ is an affine scheme $\Spec A$, still integral so $A$ is a domain. Let $K$ be the field of fractions of $A$.
+
+  \begin{sublemma}
+    \label{normal-domain}
+    The following are equivalent:
+    \begin{enumerate}
+    \item \label{normal-domain-global} $A$ is integrally closed in $K$.
+    \item \label{normal-domain-prime} $X$ is normal, i.e. for all prime ideals $\kp$ in $A$, $A_\kp$ is integrally closed in $K$.
+    \item \label{normal-domain-max} For all maximal ideals $\km$ in $A$, $A_\km$ is integrally closed in $K$.
+    \end{enumerate}
+
+    \begin{proof}
+      Some commutative algebra, omitted here.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{subproposition}
+    \label{normalization-affine-prop}
+    Let $\til{A}$ be the integral closure of $A$ in $K$. Let $\til{X} \ce \Spec \til{A}$. Then the map $\pi \c \til{X} \to X$ induced by the inclusion $\pi^\sharp \c A \inj \til{A}$ exhibits $\til{X}$ as the normalization of $X$.
+
+    \begin{proof}
+      Obviously $\til{X}$ is integral, and by \cref{normal-domain} it's normal. And $\pi$ is dominant since $\pi^\sharp$ is injective (alternatively this follows from \cref{irreducible-dominant-generic}).
+
+      Suppose given a dominant map of schemes $\rho \c Y \to X$ with $Y$ normal and integral. Recall that, since $X$ is affine, this is determined uniqely by the map on global sections $\rho^\sharp \c  A \to \Gamma(Y,\sO_Y)$. Since $\til{X}$ is also affine, it suffices to show that there is a unique extension $\til{\rho}^\sharp \c \til{A} \to \Gamma(Y,\sO_Y)$. Let $L$ denote the function field of $Y$, which is canonically isomorphic to the fraction field of $\Gamma(U,\sO_Y)$ for any nonempty affine open $U \subseteq Y$ by [Hartshorne, Exercise II.3.6].
+
+      Consider the commutative diagram
+      \[
+        \begin{tikzcd}
+          A \ar[r, "\rho^\sharp"] \ar[d] &
+          \Gamma(Y,\sO_Y) \ar[d] \\
+          \til{A} \ar[d] &
+          \Gamma(U, \sO_Y) \ar[d] \\
+          K \ar[r, "\rho^\sharp"] &
+          L,
+        \end{tikzcd}
+      \]
+       where here $U \subseteq Y$ is any nonempty affine open, the vertical maps are the canonical inclusions and restrictions, and the bottom map is the map on function fields induced by $\rho^\sharp$ (which makes sense by \cref{irreducible-dominant-generic}). Now, since $Y$ is normal, so is $U$, and hence by \cref{normal-domain} $\Gamma(U,\sO_Y)$ is integrally closed in $L$. By definition of $\til{A}$, it follows that there is a map $\til{\rho}^\sharp_U \c \til{A} \to \Gamma(U,\sO_Y)$ which fills in the middle row of the above diagram, and since the map $\Gamma(U,\sO_Y) \to L$ is injective, this $\til{\rho}^\sharp_U$ is unique.
+
+       Finally, note that our $U$ above was arbitrary, and in this situation the sheaf condition tells us that $\Gamma(Y,\sO_Y)$ is the intersection $\bigcap_U \Gamma(U,\sO_Y)$ in $L$. Thus from the above we actually get the desired unique extension $\til{\rho}^\sharp \c \til{A} \to \Gamma(Y,\sO_Y)$.
+    \end{proof}
+  \end{subproposition}
+\end{nothing}
+
+\begin{remark}
+  \label{normalization-finite}
+  Let $k$ be a field. It's a fact that if $A$ is a finite type $k$-algebra and a domain then the integral closure $\til{A}$ of $A$ in its fraction field is finite over $A$.\footnote{E.g. this is stated with a reference as [Hartshorne, Theorem I.3.9A].} Since finiteness of maps of schemes is local on the target, it then follows from \cref{normalization-glues-from-opens} and \cref{normalization-affine} that if $X$ is a finite type scheme over $k$ and integral then the normalization $\pi \c \til{X} \to X$ is a finite map.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

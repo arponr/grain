@@ -119,7 +119,7 @@
 
 \titleformat{\section}{\bfseries}{\llap{\S\thesection\hspace{\tagsep}}}{0em}{}
 \titlespacing*{\section}{0pt}{*6}{*2}
-\titleformat{\subsection}{\ttfamily}{\llap{\S\thesubsection\hspace{\tagsep}}}{0em}{}
+\titleformat{\subsection}{\bfseries}{\llap{\S\thesubsection\hspace{\tagsep}}}{0em}{}
 \titlespacing*{\subsection}{0pt}{*4}{*2}
 
 % Display format for equations
@@ -159,6 +159,7 @@
 
 \newcommand{\thmnumfont}{}
 \newcommand{\thmheadfont}{\scshape}
+\newcommand{\thmnotefont}{\scshape}
 \newcommand{\thmhorizspace}{0.3em}
 \newcommand{\thmnotespace}{0.25em}
 \newcommand{\thmsep}{\hspace{\thmhorizspace}---}
@@ -204,12 +205,13 @@
   \crefeqfmt{#1}%
   \newtheorem*{#1*}{#2}%
 
-  \newtheorem{sub#1}[subblock]{#2}%
+  \newtheorem{sub#1}[equation]{#2}%
   \crefeqfmt{sub#1}%
   \newtheorem*{sub#1*}{#2}%
 }
 
 \defthm{algorithm}{Algorithm}
+\defthm{assumption}{Assumption}
 \defthm{case}{Case}
 \defthm{conjecture}{Conjecture}
 \defthm{construction}{Construction}
@@ -544,7 +546,6 @@
 \newcommand{\dlim}{\displaystyle\lim}
 \newcommand{\dcolim}{\displaystyle\colim}
 \newcommand{\Spec}{\operatorname{Spec}}
-\newcommand{\Specm}{\operatorname{Spec_m}}
 \newcommand{\Spf}{\operatorname{Spf}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

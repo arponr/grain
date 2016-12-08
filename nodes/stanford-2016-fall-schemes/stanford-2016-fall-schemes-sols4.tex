@@ -1,0 +1,126 @@
+\input{preamble}
+
+\title{Math 216A Homework 4}
+\author{Arpon Raksit}
+\date{October 20, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\newcommand{\Closeds}{\operatorname{Closeds}}
+\newcommand{\Frac}{\operatorname{Frac}}
+\newcommand{\Opens}{\operatorname{Opens}}
+\newcommand{\MaxSpec}{\operatorname{MaxSpec}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Varieties and schemes}
+
+\begin{notation*}
+  Let $k$ be a field.
+\end{notation*}
+
+\begin{lemma}
+  \label{finite-domain}
+  Let $A$ a finite $k$-algebra which is a domain. Then $A$ is a field.
+
+  \begin{proof}
+    For any nonzero $x \in A$, multiplication by $x$ is an injective $k$-linear map $m_x \c A \to A$, since $A$ is a domain. Since $A$ is finite over $k$, $m_x$ is also surjective by rank-nullity. Thus $x$ must be a unit.
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  \label{closed-finite}
+  Let $X$ be a scheme locally of finite type over $k$. Then $x \in X$ is a closed point if and only if the the field extension $k \to \kappa(x)$ to its residue field is finite.
+
+  \begin{proof}
+    ($\shimplies$) Suppose given a closed point $x \in X$. Passing to an affine open, we may assume $X$ is an affine scheme $\Spec A$, where $A$ is of finite type over $k$. Then $x$ is a maximal ideal $\km$ in $A$, with $\kappa(x) \iso A/\km$; so $\kappa(x)$ is finite type over $k$, hence by the Nullstellensatz is finite over $k$.
+
+    ($\shimplied$) Suppose given a point $x \in X$ with $\kappa(x)$ finite over $k$. Recall that to show a subset $Z \subseteq X$ is closed it suffices to give an open cover $\{U_i\}$ of $X$ such that $Z \cap U_i$ is closed in $U_i$ for each $i$. Thus to show $x$ is a closed point, it suffices to show that $x$ is closed in any affine open of $X$ containing $x$. So we may again assume $X \iso \Spec A$ with $A$ of finite type over $k$. Then $x$ is a prime ideal $\kp$ in $A$, with $\kappa(x) \iso \Frac(A/\kp)$ finite over $k$. It follows that $A/\kp$ is finite over $k$, and hence by \cref{finite-domain} that $A/\kp$ is a field. I.e. $\kp$ is maximal, so $x$ is closed.
+  \end{proof}
+\end{lemma}
+
+\begin{nothing}
+  \label{variety-pts}
+  Let $X$ be a scheme locally of finite type over $k$. Let $T(X) \subseteq X$ be the subset of closed points. Put $T(X)$ in the subspace topology, let $i \c T(X) \inj X$ denote the inclusion, and let $\sO_{T(X)} \ce i^{-1}(\sO_X)$.
+
+  \begin{sublemma}
+    \label{variety-pts-subset}
+    Let $j \c Y \inj X$ be an open or closed immersion. Then $T(Y) = j^{-1}(T(X))$.
+
+    \begin{proof}
+      This is immediate from \cref{closed-finite}, since passing to an open or closed subscheme does not affect residue fields.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{sublemma}
+    \label{variety-pts-dense}
+    $T(X)$ is dense in $X$.
+
+    \begin{proof}
+      We need to show any any nonempty open subset $U \subseteq X$ contains a closed point. By \cref{variety-pts-subset} we may pass to an nonempty open affine contained in $U$, hence assume $U = X$ is an affine scheme. But then we're done, since any affine scheme has a closed point.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{subproposition}
+    \label{variety-pts-open-bij}
+    The map $i^{-1} \c \Opens(X) \to \Opens(T(X))$ pulling back open sets from $X$ to $T(X)$ is a bijection.
+
+    \begin{proof}
+      It's equivalent to show that $i^{-1} \c \Closeds(X) \to \Closeds(T(X))$, pullback of closed sets, is bijective. We claim that the map $\Closeds(T(X)) \to \Closeds(X)$ given by taking the closure inside $X$ is a two-sided inverse.
+
+      If $Y \subseteq X$ is closed, then we may put a closed subscheme structure on $Y$ such that it is still locally of finite type over $k$. By \cref{variety-pts-subset} we have $T(Y) = T(X) \cap Y$, and by \cref{variety-pts-dense} this is dense in $Y$. Thus $\o{i^{-1}(Y)} = Y$.
+
+      Conversely, that $i^{-1}(\o{Z})$ for closed subsets $Z \subseteq T(X)$ is evident, since taking closure commutes with restricting to subspaces. (Alternatively one could note that $i^{-1}$ is obviously surjective by definition of the subspace topology.)
+    \end{proof}
+  \end{subproposition}
+
+  \begin{subproposition}
+    \label{variety-pts-maxspec}
+    Let $A$ be a $k$-algebra of finite type and $X \ce \Spec A$. Then $(T(X),\sO_{T(X)})$ is isomorphic to $\MaxSpec A$ (as a ringed space).
+
+    \begin{proof}
+      By definition we see that $T(X)$ is homeomorphic to the space of maximal ideals in $A$ in the Zariski topology. And by \cref{variety-pts-open-bij} we see that on the basic opens $D(f)$ of $T(X)$ for $f \in A$ the sheaf $\sO_{T(X)}$ is given exactly as $\sO_X$ is. This is also exactly how we define the structure sheaf of $\MaxSpec A$, so we clearly have an isomorphism.
+    \end{proof}
+  \end{subproposition}
+
+  \begin{subproposition}
+    \label{variety-pts-algset}
+    Suppose $X$ is moreover reduced. Then $(T(X),\sO_{T(X)})$ is an abstract algebraic set.
+
+    \begin{proof}
+      If $U \subseteq X$ is an open subset then by \cref{variety-pts-subset} we have $T(X) \cap U = T(U)$, and since the two composite inclusions $T(U) \to T(X) \to X$ and $T(U) \to U \to X$ are equal, we must have $\sO_{T(X)}|_{T(U)} \iso \sO_{T(U)}$. Since the question is local on $X$ we are reduced to the case that $X$ is an affine scheme $\Spec A$ with $A$ reduced and finite type over $k$. But then we're done by \cref{variety-pts-maxspec}.
+    \end{proof}
+  \end{subproposition}
+\end{nothing}
+
+\begin{lemma}
+  \label{maximal-preimage}
+  Let $\phi \c A \to B$ be a map of $k$-algebras, with $B$ finite type. Let $\km$ be a maximal ideal of $B$. Then $\phi^{-1}(\km)$ is a maximal ideal of $A$.
+
+  \begin{proof}
+    Consider the induced injection $A/\phi^{-1}(\km) \inj B/\km$. We know $\phi^{-1}(\km)$ is a prime, so the source is a domain. The target is a field, and finite type over $k$, so finite over $k$ by the Nullstelensatz. Thus the source is also finite over $k$, so by \cref{finite-domain} it is a field, i.e. $\phi^{-1}(\km)$ is maximal.
+  \end{proof}
+\end{lemma}
+
+\begin{lemma}
+  \label{jacobson}
+  Let $A$ be a $k$-algebra of finite type. Then $A$ is Jacobson, i.e. for any prime ideal $\kp$ of $A$, we have $\kp = \bigcap_{\km \supseteq \kp} \km$, where the intersection is over all maximal ideals $\km$ in $A$ containing $\kp$.
+
+  \begin{proof}
+    Passing to $A/\kp$, we may reduce to the case $\kp = 0$. I.e. $A$ is a domain and we need to show that given any nonzero $f \in A$, there is some maximal ideal $\km$ in $A$ such that $f \notin \km$. Since $A$ is a domain and $f \ne 0$, the localization $A_f$ is nonzero, hence contains a maximal ideal $\km'$. The localization $A_f \iso A[t]/(1-ft)$ is still finite type over $k$, so by \cref{maximal-preimage} the preimage $\km$ of $\km'$ in the localization $A \to A_f$ is maximal. And clearly $\km$ does not contain $f$.
+  \end{proof}
+
+  \begin{subremark}
+    \label{jacobson-nil}
+    Since $f \in A$ is nilpotent if and only if it is contained in all prime ideals $\kp$ in $A$, for a Jacobson ring we immediately see that $f \in A$ is nilpotent if and only if it is contained in all \emph{maximal} ideals $\km$ in $A$.
+  \end{subremark}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

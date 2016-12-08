@@ -1,0 +1,144 @@
+\input{preamble}
+
+\title{Math 216A Homework 8}
+\author{Arpon Raksit}
+\date{November 17, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reducing valuative criteria to DVRs}
+
+\begin{nothing}
+  \label{dvr-dom}
+  Let $(\sO,\km)$ be a noetherian local domain with fraction field $K$.
+
+  \begin{sublemma}
+    \label{dvr-dom-good-gens}
+    Let $\{x_1,\ldots,x_n\}$ be a set of generators for $\km$. Then there exists $i \in \{1,\ldots,n\}$ such that if we define $\sO' \ce \sO[x_1/x_i,\ldots,x_n/x_i] \subseteq K$ then the principal ideal $(x_i)$ of $\sO'$ is not the unit ideal.
+
+    \begin{proof}
+      Choose a valuation ring $(A,\km_A)$ of $K$ dominating $(\sO,\km)$ (Matsumura, Theorem 10.2), and let $v \c K^\times \to \Gamma$ be the associated valuation. Recall this means
+      \[
+        A = \{x \in K^\times : v(x) \ge 0\} \cup \{0\}, \quad
+        \km_A = \{x \in K^\times : v(x) > 0\} \cup \{0\},
+      \]
+      so since $A$ dominates $\sO$ we know $v(x_1),\ldots,v(x_n) > 0$. We choose $i \in \{1,\ldots,n\}$ such that $v(x_i)$ is minimal among $v(x_1),\ldots,v(x_n)$. Then clearly $\sO' \subseteq A$. And so the intersection $\km_A \cap \sO'$ is a prime ideal, in particular is not the unit ideal. Since $x_1 \in \km_A$, the claim follows.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{sublemma}
+    \label{dvr-dom-dim-1}
+    There is a noetherian local domain $(\sO'',\km'') \subseteq K$ of dimension $1$ dominating $(\sO,\km)$.
+
+    \begin{proof}
+      Let $\{x_1,\ldots,x_n\}$ be a set of generators for $\km$. Choose $i \in \{1,\ldots,n\}$ and define $\sO'$ as in \cref{dvr-dom-good-gens}. Then $(x_i) \subseteq \sO'$ is not the unit ideal so we may choose a minimal prime ideal $\kp$ containing it. Define $(\sO'',\km'') \ce (\sO'_\kp,\kp\sO'_\kp)$. This is evidently a local domain, and is noetherian since it is a localization of $\sO'$, which is noetherian by construction since $\sO$ is. It is dimension $1$ by the hauptidealsatz. Finally, $\km'' \cap \sO$ is a prime ideal in $\sO$ evidently containing $x_1,\ldots,x_n$, and hence must be $\km$, so indeed this dominates $\sO$.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{subproposition}
+    \label{dvr-dom-krull-akizuki}
+    Let $L$ be a finitely generated field extension of $K$. Then there exists a discrete valuation ring $(R,\km_R)$ of $L$ dominating $(\sO,\km)$.
+
+    \begin{proof}
+      First observe that we may replace $(K,\sO,\km)$ with any $(K',\sO',\km')$ where $K'$ is an intermediate extension of $L/K$ and $(\sO',\km')$ is a noetherian local domain in $K'$ dominating $(\sO,\km)$. This gives us two reductions:
+      \begin{itemize}
+      \item If $L$ is an extension of a transcendental intermediate field $K' = K(t)$, then we may take $\sO' = \sO[t]$ and $\km'$ to be any maximal ideal containing $\km\sO'$. This reduces us to the case that $L$ is a finite extension of $K$.
+      \item By \cref{dvr-dom-dim-1} we are reduced us to the case that $\sO$ is dimension $1$.
+      \end{itemize}
+      
+      Now let $\til\sO$ be the integral closure of $\sO$ in $L$. By Krull-Akizuki (Matsumura, Corollary to Theorem 11.7), $\til\sO$ is a Dedekind domain. Thus if we take $\til\km$ to be any maximal ideal of $\til\sO$ containing $\km\til\sO$, the localization $(R,\km_R) \ce (\til\sO_{\til\km},\til\km\til\sO_{\til\km})$ will be a DVR. The intersection $\km_R \cap \sO$ is a prime ideal containing $\km$ and hence must be $\km$, so $R$ indeed dominates $\sO$.
+    \end{proof}
+  \end{subproposition}
+\end{nothing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{nothing}
+  \label{valcrit}
+  We now explain how in the noetherian setting we may use
+  \cref{dvr-dom-krull-akizuki} to reduce the checking of valuative
+  criteria to the case of discrete valuation rings.
+
+  \begin{subproposition}
+    \label{valcrit-sep}
+    Let $X$ be a locally noetherian scheme. Let $f \c X \to Y$ be a map locally of finite type. Then $f$ is separated if and only if $f$ satisfies the valuative criterion for separatedness for discrete valuation rings.
+
+    \begin{proof}
+      The ``only if'' direction still follows from the usual valuative criterion, so we just have to show the ``if'' direction. Here we just have to slightly modify the proof of Hartshorne, Theorem II.4.3:
+      \begin{itemize}
+      \item Firstly note that we only need $X$ locally noetherian for the diagonal
+        \[
+          \Delta \c X \to X \times_Y X
+        \]
+        to be quasicompact.
+      \item Secondly, note that since $f$ is locally of finite type, so is the base change
+        \[
+          f' \c X \times_Y X \to X;
+        \]
+        and since $X$ is locally noetherian this implies $X \times_Y X$ is locally noetherian. Thus, given $\xi_1 \in \Delta(X)$ and a specialization $\xi_0 \in X \times_Y X$, \cref{dvr-dom-krull-akizuki} now allows us to choose a \emph{discrete} valuation ring $R$ of $K \ce \kappa(\xi_1)$ dominating the \emph{noetherian} local ring $\sO$ of $\xi_0$ in the reduced induced scheme structure on $\o{\{\xi_1\}} \subseteq X \times_Y X$. \qedhere
+      \end{itemize}
+    \end{proof}
+  \end{subproposition}
+
+  \begin{sublemma}
+    \label{valcrit-chow}
+    Let $Y$ be a noetherian scheme. Let $f \c X \to Y$ be a separated map of finite type. Then the following are equivalent:
+    \begin{enumerate}
+    \item \label{valcrit-chow-univ} $f$ is proper;
+    \item \label{valcrit-chow-fin} for any finite type map $g \c Y' \to Y$, the base change $f' \c X' \ce X \times_Y Y'\to Y'$ is closed;
+    \item \label{valcrit-chow-aff} for $n \ge 1$, the base change $f' \c \bA^n_X \iso X \times_Y \bA^n_Y \to \bA^n_Y$ is closed.
+    \end{enumerate}
+
+    \begin{proof}
+      Note that since we're assuming $f$ is separated and of finite type, \cref{valcrit-chow-univ} is equivalent to $f$ being universally closed. Observe also that all three conditions are local on $Y$, so we may assume $Y$ is an affine scheme $\Spec A$ with $A$ a noetherian ring.
+
+      The implications \cref{valcrit-chow-univ} $\shimplies$ \cref{valcrit-chow-fin} and \cref{valcrit-chow-fin} $\shimplies$ \cref{valcrit-chow-aff} are tautological.
+
+      \cref{valcrit-chow-aff} $\shimplies$ \cref{valcrit-chow-fin}: Since \cref{valcrit-chow-fin} is local also on $Y'$, we may assume $Y'$ is an affine scheme $\Spec B$ of finite type over $Y = \Spec A$. In this case we may choose a closed immersion $Y' \inj \bA^n_Y$, from which we get a commutative diagram
+      \[
+        \begin{tikzcd}
+          X' \ar[r, hookrightarrow] \ar[d] &
+          \bA^n_X \ar[r] \ar[d] &
+          X \ar[d] \\
+          Y' \ar[r, hookrightarrow] &
+          \bA^n_Y \ar[r] &
+          Y.
+        \end{tikzcd}
+      \]
+      By hypothesis the middle vertical map is closed. Since the upper left and lower left maps are closed immersions, the left vertical map $f'$ is also closed, as desired.
+
+      \cref{valcrit-chow-fin} $\shimplies$ \cref{valcrit-chow-univ}: By Chow's lemma we may find a surjective projective map $p \c X' \to X$ such that $p' \ce fp \c X' \to Y$ is quasiprojective. The latter means we may factor $p'$ as a composite of an immersion $j \c X' \inj X''$ and a projective map $p'' \c X'' \to Y$. To show $f$ is proper it suffices to show $p'$ is proper (since $X$ is the image of $X'$ in $p$, and the image of a proper map is proper (Hartshorne, Exercise II.4.4)). It would therefore suffice to show $j$ is closed, hence in fact a closed immersion. To see this, we factor $j$ as the composite
+      \[
+        X' \lblto{\Gamma_j} X'' \times_Y X' \lblto{(\id_{X''},p)} X'' \times_Y X \lblto{f''} X'',
+      \]
+      where $\Gamma_j$ is the graph of $j$ and $f''$ is the base change of $f$ along $p'' \c X'' \to X$. Since $j$ is immersion, hence separated, $\Gamma_j$ is closed; since $p$ is projective so is $(\id_{X''},p)$, which is hence closed; and since $p''$ is projective, in particular finite type, the base change $f''$ is closed by hypothesis. Thus the composite $j$ is closed, as desired.
+    \end{proof}
+  \end{sublemma}
+
+  \begin{subproposition}
+    \label{valcrit-proper}
+    Let $f \c X \to Y$ be a finite type map of noetherian schemes. Then $f$ is proper if and only if $f$ satisfies the valuative criterion for properness for discrete valuation rings.
+
+    \begin{proof}
+      As in \cref{valcrit-sep} the ``only if'' direction is automatic from the usual valuative criterion and we want to show the ``if direction'', so assume $f$ satisfies the valuative criterion for discrete valuation rings.
+
+      By \cref{valcrit-sep} we know that $f$ is separated, so we need only show that $f$ is universally closed. By \cref{valcrit-chow} it suffices to check for finite type maps $g \c Y' \to Y$ that the base change $f' \c X' \ce X \times_Y Y' \to Y'$ is closed; but if $g$ is of finite type then $Y'$ is also locally noetherian, and we know the valuative criterion is stable under base change, so the map $f' \c X' \to Y'$ satisfies the same hypotheses as $f$. This reduces to checking that $f$ is closed.
+
+      We may now follow the proof of the usual valuative criterion (say the one in Brian's notes). We first reduce to checking that $f(X)$ is stable under specialization. We then have to show for any $x \in X$ and specialization $y_0 \in Y$ of $y \ce f(x)$ that there is an $x_0 \in X$ with $f(x_0) = y_0$. Let $\sO$ be the local ring at $y_0$ in the reduced induced subscheme structure on $\o{\{y\}}$. By noetherianess of $Y$, this is a local noetherian domain with fraction field $\kappa(y)$. Since $f$ is of finite type, $\kappa(x)$ is a finitely generated field extension of $\kappa(y)$, and hence we may use \cref{dvr-dom-krull-akizuki} to find a discrete valuation ring $A$ with fraction field $\kappa(x)$ and a map $\Spec A \to Y$ sending the generic point to $y_0$ and the closed point to $y$. But by the valuative criterion the canonical map $\Spec \kappa(x) \to X$ lifts to a map $\Spec A \to X$, and the image of the closed point in this map will be the desired $x_0$ lying over $y_0$.
+    \end{proof}
+  \end{subproposition}
+\end{nothing}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

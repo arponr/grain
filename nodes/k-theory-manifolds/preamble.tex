@@ -1,6 +1,6 @@
 \documentclass[11pt,leqno]{article}
 
-\linespread{1.07}
+\linespread{1.1}
 \frenchspacing
 
 \usepackage[%
@@ -43,6 +43,7 @@
   scr=boondox, scrscaled=0.95,%
   bb=boondox,  bbscaled=1.0,%
 ]{mathalfa}
+\usepackage[textsize=footnotesize,backgroundcolor=orange!50]{todonotes}
 \usepackage{cleveref}
 \usepackage{xr}
 
@@ -119,7 +120,7 @@
 
 \titleformat{\section}{\bfseries}{\llap{\S\thesection\hspace{\tagsep}}}{0em}{}
 \titlespacing*{\section}{0pt}{*6}{*2}
-\titleformat{\subsection}{\bfseries}{\llap{\S\thesubsection\hspace{\tagsep}}}{0em}{}
+\titleformat{\subsection}{\scshape}{\llap{\S\thesubsection\hspace{\tagsep}}}{0em}{}
 \titlespacing*{\subsection}{0pt}{*4}{*2}
 
 % Display format for equations
@@ -197,15 +198,15 @@
 
 \newcounter{block}
 \newcounter{subblock}
-\numberwithin{equation}{block}
 \numberwithin{subblock}{block}
+\numberwithin{equation}{subblock}
 
 \newcommand{\defthm}[2]{%
   \newtheorem{#1}[block]{#2}%
   \crefeqfmt{#1}%
   \newtheorem*{#1*}{#2}%
 
-  \newtheorem{sub#1}[equation]{#2}%
+  \newtheorem{sub#1}[subblock]{#2}%
   \crefeqfmt{sub#1}%
   \newtheorem*{sub#1*}{#2}%
 }
@@ -430,8 +431,11 @@
 }
 
 \newcommand{\arrlen}{1.25em}
+\newcommand{\shortarrlen}{0.85em}
 \renewcommand{\to}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,->](0,0.5ex)--(\arrlen,0.5ex);}}
+\newcommand{\limto}{\mathrel{\tikz[baseline]%
+    \draw[>=stealth,->](0,0.4ex)--(\shortarrlen,0.4ex);}}
 \newcommand{\from}{\mathrel{\tikz[baseline]%
     \draw[>=stealth,<-](0,0.5ex)--(\arrlen,0.5ex);}}
 \renewcommand{\mapsto}{\mathrel{\tikz[baseline]%

@@ -1,0 +1,33 @@
+\input{preamble}
+
+\title{Math 216A Homework 6}
+\author{Arpon Raksit}
+\date{November 3, 2016}
+
+\numberwithin{block}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\newcommand{\codim}{\operatorname{codim}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dimension pathologies}
+
+Let $R$ be a discrete valuation ring containing its residue field $k$.
+
+Let $X \ce \Spec R[t]$. Let $\pi$ be a uniformizer in $R$ and $\kp \ce (\pi t - 1) \subseteq R[t]$. Observe that $R[t]/\kp = R[t]/(\pi t - 1) \iso R_\pi$ is the fraction field of $R$, in particular a field, so $\kp$ is maximal. Thus $Y \ce \{\kp\} \subseteq X$ is a closed set of dimension $0$. Then observe that $Y$ has codimension $1$, i.e. $\dim R[t]_\kp = 1$, by Krull's hauptidealsatz. Since $\dim R = 1 \implies \dim R[t] = 2$, we have that
+\[
+\dim R[t]_\kp = 1 < 2 = \dim X \quad\text{and}\quad
+\dim Y + \codim(Y,X) = 1 < 2 = \dim X
+\]
+(note all we really needed here is that $\dim R[t] \ge 2$, which is witnessed by the chain of primes $0 \subsetneq (\pi) \subsetneq (\pi, t)$).
+
+Lastly, consider the (nonempty) open set $U \ce D(\pi) \subseteq X$, which is isomorphic to $\Spec R[t]_\pi \iso \Spec R_\pi[t]$. Since $R_\pi$ is a field, this has dimension $1$, unlike $X$ which has dimension $2$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
